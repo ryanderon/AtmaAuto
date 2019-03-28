@@ -7,4 +7,17 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_jadwal">Jadwal</string>
+    <string name="title_tugas">Tugas</string>
+    <string name="title_uang">Uang</string>
+    <string name="title_beranda">Beranda</string>
+    <string name="title_supplier">Supplier</string>
+    <string name="title_sparepart">Sparepart</string>
+    <string name="title_customer">Customer</string>
+
+    <string name="profile">PROFILE</string>
+    <string name="about">ABOUT</string>
+    <string name="website">WEBSITE</string>
+    <string name="logout">LOG OUT</string>
 </resources>

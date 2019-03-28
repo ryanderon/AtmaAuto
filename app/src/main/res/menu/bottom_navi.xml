@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_beranda"
+        android:icon="@drawable/ic_action_home"
+        android:title="@string/title_beranda" />
+
+    <item
+        android:id="@+id/navigation_supplier"
+        android:icon="@drawable/ic_action_supplier"
+        android:title="@string/title_supplier" />
+
+    <item
+        android:id="@+id/navigation_sparepart"
+        android:icon="@drawable/ic_action_sparepart"
+        android:title="@string/title_sparepart" />
+
+    <item
+        android:id="@+id/navigation_customer"
+        android:icon="@drawable/ic_action_customer"
+        android:title="@string/title_customer" />
+</menu>
