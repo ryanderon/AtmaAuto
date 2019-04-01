@@ -88,9 +88,9 @@
     </style>
 
     <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
-        <item name="colorAccent">@color/guillotine_background_dark</item>
-        <item name="android:textColorPrimary">@color/guillotine_background_dark</item>
-        <item name="android:background">@color/bgLogin</item>
+        <item name="colorAccent">@color/bgLogin</item>
+        <item name="android:textColorPrimary">@color/bgLogin</item>
+        <item name="android:background">@color/startblue</item>
     </style>
 
 </resources>

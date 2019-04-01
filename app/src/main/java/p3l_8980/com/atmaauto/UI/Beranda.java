@@ -1,6 +1,7 @@
 package p3l_8980.com.atmaauto.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 
 import p3l_8980.com.atmaauto.R;
+import p3l_8980.com.atmaauto.Session.SessionManager;
 
 import com.yalantis.guillotine.animation.GuillotineAnimation;
 
@@ -36,12 +38,13 @@ public class Beranda extends AppCompatActivity {
     FloatingActionButton fab;
     //Global Variable
     static int view_position = 0;
-
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beranda);
+        session = new SessionManager(Beranda.this);
         IntializeView();
         // Shared Data
     }
@@ -72,6 +75,13 @@ public class Beranda extends AppCompatActivity {
                 .build();
 
         registerForContextMenu(contentRight);
+
+        guillotineMenu.findViewById(R.id.logout_group).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                session.logoutUser();
+            }
+        });
 
         switch (getIntent().getIntExtra("addDialog",0)){
             case 0: bottombar.setSelectedItemId(R.id.navigation_beranda); switchfragment(R.id.navigation_beranda);break;
@@ -104,6 +114,11 @@ public class Beranda extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.add(0,v.getId(),0, "Reset Balance");
@@ -126,8 +141,30 @@ public class Beranda extends AppCompatActivity {
                 contentRight.setVisibility(View.INVISIBLE);
                 fab.hide();
                 break;
+            case R.id.navigation_supplier:
+                view_position = 1;
+                // Fragment
+                FragmentSupplier fragmentSupplier =  new FragmentSupplier();
+                manager.beginTransaction().replace(R.id.fragmentplace,fragmentSupplier).commit();
+                fragmentparams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
+                // VIEW
+                title.setText("Data Supplier");
+                contentRight.setVisibility(View.INVISIBLE);
+                fab.show();
+                break;
         }
         fragmentlayout.setLayoutParams(fragmentparams);
+    }
+
+    public void FABonCLick(View view) {
+        Intent i;
+        switch (view_position) {
+            case 1:
+                i = new Intent(Beranda.this, AddSupplier.class);
+                i.putExtra("simpan", -1);
+                startActivity(i);
+                break;
+        }
     }
 
 }

@@ -35,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/E:/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_accessibility_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/E:/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_back_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,7 +56,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_action_customer" />
+                                      <entry key="outputName" value="ic_action_back" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>

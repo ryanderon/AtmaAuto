@@ -14,11 +14,6 @@ import p3l_8980.com.atmaauto.R;
 
 public class FragmentBeranda extends Fragment {
 
-    private TextView tJadwal, tTugas, tPlus, tMinus;
-    private TextView spWaktu1, spNama1,
-            spWaktu2, spNama2,
-            spWaktu3, spNama3;
-    private TextView tSisa, NamaUser;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +22,7 @@ public class FragmentBeranda extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frg_beranda,container,false);
-
+        View view = inflater.inflate(R.layout.frgberanda,container,false);
 
         return view;
     }
