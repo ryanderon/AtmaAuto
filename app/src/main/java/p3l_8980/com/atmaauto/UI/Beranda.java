@@ -152,6 +152,18 @@ public class Beranda extends AppCompatActivity {
                 contentRight.setVisibility(View.INVISIBLE);
                 fab.show();
                 break;
+
+            case R.id.navigation_sparepart:
+                 view_position = 2;
+                 //Fragment
+                 FragmentSparepart fragmentSparepart = new FragmentSparepart();
+                 manager.beginTransaction().replace(R.id.fragmentplace, fragmentSparepart).commit();
+                 fragmentparams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
+                 //VIEW
+                 title.setText("Data Sparepart");
+                 contentRight.setVisibility(View.INVISIBLE);
+                 fab.show();
+                 break;
         }
         fragmentlayout.setLayoutParams(fragmentparams);
     }

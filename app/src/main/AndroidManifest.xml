@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.AddSupplier"></activity>
+        <activity android:name=".Controller.SparepartData"></activity>
+        <activity android:name=".Controller.SparepartList" />
+        <activity android:name=".Controller.Sparepart" />
+        <activity android:name=".UI.AddSupplier" />
         <activity
             android:name=".UI.Home"
             android:label="@string/title_activity_home"

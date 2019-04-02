@@ -45,5 +45,9 @@ public interface ApiClient {
                                    @Field("supplier_address") String supplier_address,
                                    @Field("supplier_phone_number") String supplier_phone_number);
 
+    @GET("spareparts")
+    Call<SparepartList> getSpareparts();
+
+
 
 }
