@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,14 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import p3l_8980.com.atmaauto.Controller.ApiClient;
-import p3l_8980.com.atmaauto.Controller.LoginAPI;
-import p3l_8980.com.atmaauto.Controller.ResponseUser;
-import p3l_8980.com.atmaauto.Controller.UserDAO;
 import p3l_8980.com.atmaauto.R;
 import p3l_8980.com.atmaauto.Session.SessionManager;
-import p3l_8980.com.atmaauto.UI.Beranda;
-
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;

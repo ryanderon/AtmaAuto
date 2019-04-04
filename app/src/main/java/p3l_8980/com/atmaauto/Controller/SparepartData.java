@@ -3,32 +3,33 @@ package p3l_8980.com.atmaauto.Controller;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseUser {
+public class SparepartData {
+
     @SerializedName("data")
     @Expose
-    private UserDAO data;
+    private Sparepart data;
 
     /**
      * No args constructor for use in serialization
      *
      */
-    public ResponseUser() {
+    public SparepartData() {
     }
 
     /**
      *
      * @param data
      */
-    public ResponseUser(UserDAO data) {
+    public SparepartData(Sparepart data) {
         super();
         this.data = data;
     }
 
-    public UserDAO getData() {
+    public Sparepart getData() {
         return data;
     }
 
-    public void setData(UserDAO data) {
+    public void setData(Sparepart data) {
         this.data = data;
     }
 }
