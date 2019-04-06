@@ -48,9 +48,11 @@ public class Sparepart {
     @SerializedName("number")
     @Expose
     private String number;
+
 //    @SerializedName("image")
 //    @Expose
 //    private String image;
+
     @SerializedName("sparepart_type_name")
     @Expose
     private String sparepartTypeName;
@@ -80,9 +82,8 @@ public class Sparepart {
      * @param sparepartName
      * @param place
      * @param purchasePrice
+//     * @param *image
      */
-     /* @param *image */
-
     public Sparepart(String idSparepart, String sparepartName, String merk, String stock, String minStock, String purchasePrice, String sellPrice, String placement, String position, String place, String number, /*String image ,*/ String sparepartTypeName, String idSparepartType) {
         super();
         this.idSparepart = idSparepart;

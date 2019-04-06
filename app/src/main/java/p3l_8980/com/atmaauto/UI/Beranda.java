@@ -176,6 +176,12 @@ public class Beranda extends AppCompatActivity {
                 i.putExtra("simpan", -1);
                 startActivity(i);
                 break;
+
+            case 2:
+                i = new Intent(Beranda.this, AddSparepart.class);
+                i.putExtra("simpan", -1);
+                startActivity(i);
+                break;
         }
     }
 
