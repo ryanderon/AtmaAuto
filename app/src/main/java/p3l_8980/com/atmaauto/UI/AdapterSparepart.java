@@ -19,7 +19,7 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
     private Context mContext;
     private List<Sparepart> mData;
 
-    public AdapterSparepart(Context mContext, List<Sparepart> mData) {
+    public AdapterSparepart(List<Sparepart> mData, Context mContext) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -39,7 +39,7 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
         myViewHolder.sparepart_name.setText(mData.get(i).getPosition());
-        myViewHolder.sparepart_img.setImageResource(mData.get(i).getImage() );
+/*        myViewHolder.sparepart_img.setImageResource(mData.get(i).getImage() ); */
     }
 
     @Override
@@ -49,11 +49,11 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView sparepart_name;
-        ImageView sparepart_img;
         public  MyViewHolder(View itemView){
             super(itemView);
             sparepart_name = (TextView) itemView.findViewById(R.id.sparepart_name);
-            sparepart_img = (ImageView) itemView.findViewById(R.id.sparepart_image);
+/*            ImageView sparepart_img;
+            sparepart_img = (ImageView) itemView.findViewById(R.id.sparepart_image); */
         }
     }
 }

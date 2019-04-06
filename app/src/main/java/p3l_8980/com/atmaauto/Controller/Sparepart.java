@@ -8,39 +8,49 @@ public class Sparepart {
     @SerializedName("id_sparepart")
     @Expose
     private String idSparepart;
+
     @SerializedName("sparepart_name")
     @Expose
     private String sparepartName;
+
     @SerializedName("merk")
     @Expose
     private String merk;
+
     @SerializedName("stock")
     @Expose
     private String stock;
+
     @SerializedName("min_stock")
     @Expose
     private String minStock;
+
     @SerializedName("purchase_price")
     @Expose
     private String purchasePrice;
+
     @SerializedName("sell_price")
     @Expose
     private String sellPrice;
+
     @SerializedName("placement")
     @Expose
     private String placement;
+
     @SerializedName("position")
     @Expose
     private String position;
+
     @SerializedName("place")
     @Expose
     private String place;
+
     @SerializedName("number")
     @Expose
     private String number;
-    @SerializedName("image")
-    @Expose
-    private String image;
+//    @SerializedName("image")
+//    @Expose
+//    private String image;
     @SerializedName("sparepart_type_name")
     @Expose
     private String sparepartTypeName;
@@ -63,7 +73,6 @@ public class Sparepart {
      * @param position
      * @param idSparepartType
      * @param sparepartTypeName
-     * @param image
      * @param number
      * @param idSparepart
      * @param stock
@@ -72,7 +81,9 @@ public class Sparepart {
      * @param place
      * @param purchasePrice
      */
-    public Sparepart(String idSparepart, String sparepartName, String merk, String stock, String minStock, String purchasePrice, String sellPrice, String placement, String position, String place, String number, String image, String sparepartTypeName, String idSparepartType) {
+     /* @param *image */
+
+    public Sparepart(String idSparepart, String sparepartName, String merk, String stock, String minStock, String purchasePrice, String sellPrice, String placement, String position, String place, String number, /*String image ,*/ String sparepartTypeName, String idSparepartType) {
         super();
         this.idSparepart = idSparepart;
         this.sparepartName = sparepartName;
@@ -85,7 +96,7 @@ public class Sparepart {
         this.position = position;
         this.place = place;
         this.number = number;
-        this.image = image;
+/*        this.image = image; */
         this.sparepartTypeName = sparepartTypeName;
         this.idSparepartType = idSparepartType;
     }
@@ -177,7 +188,7 @@ public class Sparepart {
     public void setNumber(String number) {
         this.number = number;
     }
-
+/*
     public String getImage() {
         return image;
     }
@@ -185,7 +196,7 @@ public class Sparepart {
     public void setImage(String image) {
         this.image = image;
     }
-
+*/
     public String getSparepartTypeName() {
         return sparepartTypeName;
     }

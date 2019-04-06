@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,9 +50,10 @@ public class FragmentSparepart extends Fragment {
         rview = view.findViewById(R.id.sparepart_list);
         rview.setHasFixedSize(true);
         layout = new LinearLayoutManager(getContext());
-        rview.setLayoutManager(layout);
+        rview.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        rview.setAdapter(adapter);
 
-        sparepartList = new ArrayList<>();
+//        sparepartList = new ArrayList<>();
 
         session = new SessionManager(getContext());
         session.checkLogin();
@@ -69,14 +71,14 @@ public class FragmentSparepart extends Fragment {
             @Override
             public void onResponse(Call<SparepartList> call, Response<SparepartList> response) {
                 try {
-                    adapter = new AdapterSparepart(response.body().getData(),getContext());
+/*KEBALIKKK*/                    adapter = new AdapterSparepart(response.body().getData(),getContext());
                     adapter.notifyDataSetChanged();
 //                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 //                    rview.setLayoutManager(mLayoutManager);
 //                    rview.setItemAnimator(new DefaultItemAnimator());
                     rview.setAdapter(adapter);
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Tidak Ada Supplier!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Tidak Ada Sparepart!", Toast.LENGTH_SHORT).show();
                 }
             }
 
