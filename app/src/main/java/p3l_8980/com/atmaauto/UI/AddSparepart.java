@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,21 @@ public class AddSparepart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sparepart);
+
+//        Spinner positionSpinner = (Spinner) findViewById(R.id.position);
+//        Spinner placeSpinner = (Spinner) findViewById(R.id.place);
+//
+//        ArrayAdapter<String> positionAdapter = new ArrayAdapter<String>(AddSparepart.this, android.R.layout.simple_list_item_1,
+//                getResources().getStringArray(R.array.position));
+//        positionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        positionSpinner.setAdapter(positionAdapter);
+//
+//        ArrayAdapter<String> placeAdapter = new ArrayAdapter<String>(AddSparepart.this, android.R.layout.simple_list_item_1,
+//                getResources().getStringArray(R.array.place));
+//        placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        positionSpinner.setAdapter(placeAdapter);
+//
+
         init();
         simpan = getIntent().getIntExtra("simpan",-1);
 
@@ -61,6 +78,7 @@ public class AddSparepart extends AppCompatActivity {
             number.setText(getIntent().getStringExtra("number"));
             sparepartTypeName.setText(getIntent().getStringExtra("type"));
             idSparepartType.setText(getIntent().getStringExtra("idtype"));
+            addButton.setText("UBAH");
         }
 
         backButton.setOnClickListener(new View.OnClickListener() {

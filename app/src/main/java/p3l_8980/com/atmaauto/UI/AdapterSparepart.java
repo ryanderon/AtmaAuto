@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +23,26 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
 
     private Context mContext;
     private List<Sparepart> mData = new ArrayList<>();
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView sparepart_name, stock, sell_price;
+        CardView cardView;
+
+        public LinearLayout topcard;
+
+        public  MyViewHolder(View itemView){
+            super(itemView);
+            sparepart_name = (TextView) itemView.findViewById(R.id.sparepart_name);
+            stock = (TextView) itemView.findViewById(R.id.stock);
+            sell_price = (TextView) itemView.findViewById(R.id.sell_price);
+            cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+            topcard = itemView.findViewById(R.id.topcard);
+
+
+/*            ImageView sparepart_img;
+            sparepart_img = (ImageView) itemView.findViewById(R.id.sparepart_image); */
+        }
+    }
 
     public AdapterSparepart(List<Sparepart> mData, Context mContext) {
         this.mContext = mContext;
@@ -43,14 +64,38 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
 
         myViewHolder.sparepart_name.setText(mData.get(i).getSparepartName());
         myViewHolder.stock.setText("Stok : " + mData.get(i).getStock());
-        myViewHolder.sell_price.setText("Harga : " +mData.get(i).getSellPrice());
+        myViewHolder.sell_price.setText("Harga : " + mData.get(i).getSellPrice());
 /*        myViewHolder.sparepart_img.setImageResource(mData.get(i).getImage() ); */
 
         final Sparepart data = mData.get(i);
         final int ifinal = myViewHolder.getAdapterPosition();
-        myViewHolder.sparepart_name.setText(data.getSparepartName());
-        myViewHolder.stock.setText(data.getStock());
-        myViewHolder.sell_price.setText(data.getSellPrice());
+
+        myViewHolder.topcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, AddSparepart.class);
+                intent.putExtra("simpan", i);
+                intent.putExtra("id", data.getIdSparepart());
+                intent.putExtra("name", data.getSparepartName());
+                intent.putExtra("merk", data.getMerk());
+                intent.putExtra("stock", data.getStock());
+                intent.putExtra("minstock", data.getMinStock());
+                intent.putExtra("purchaseprice", data.getPurchasePrice());
+                intent.putExtra("sellprice", data.getSellPrice());
+                intent.putExtra("placement", data.getPlacement());
+                intent.putExtra("position", data.getPosition());
+                intent.putExtra("place", data.getPlace()) ;
+                intent.putExtra("number", data.getNumber());
+                intent.putExtra("type", data.getSparepartTypeName());
+                intent.putExtra("idtype", data.getIdSparepartType());
+                mContext.startActivity(intent);
+            }
+            });
+
+//        myViewHolder.sparepart_name.setText(data.getSparepartName());
+//        myViewHolder.stock.setText(data.getStock());
+//        myViewHolder.sell_price.setText(data.getSellPrice());
+
     }
 
     @Override
@@ -58,19 +103,5 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView sparepart_name, stock, sell_price;
-        CardView cardView;
 
-        public  MyViewHolder(View itemView){
-            super(itemView);
-            sparepart_name = (TextView) itemView.findViewById(R.id.sparepart_name);
-            stock = (TextView) itemView.findViewById(R.id.stock);
-            sell_price = (TextView) itemView.findViewById(R.id.sell_price);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_id);
-
-/*            ImageView sparepart_img;
-            sparepart_img = (ImageView) itemView.findViewById(R.id.sparepart_image); */
-        }
-    }
 }

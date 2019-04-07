@@ -48,187 +48,188 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="374dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="18dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/idSparepart"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="ID Sparepart"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/sparepartName"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Nama Sparepart"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/idSparepart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="ID Sparepart"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/merk"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Merk"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/sparepartName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Nama Sparepart"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/stock"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Stok"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/merk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Merk"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/minStock"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Stok Minimal"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Stok"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/purchasePrice"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Harga Beli"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/minStock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Stok Minimal"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/sellPrice"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Harga Jual"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/purchasePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Harga Beli"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/placement"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Penempatan"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/sellPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Harga Jual"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/position"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Posisi"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/placement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Penempatan"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/place"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Tempat"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Posisi"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/number"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Nomor"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/place"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Tempat"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/sparepartTypeName"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="Tipe Sparepart"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Nomor"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/idSparepartType"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:ems="10"
-            android:hint="ID Tipe Sparepart"
-            android:inputType="textPersonName"
-            app:met_floatingLabel="highlight" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/sparepartTypeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Tipe Sparepart"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-        <Button
-            android:id="@+id/btnAdd"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_bluelogin"
-            android:text="Tambah"
-            android:textColor="@color/bgLogin"
-            android:textSize="16sp"
-            />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/idSparepartType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="ID Tipe Sparepart"
+                android:inputType="textPersonName"
+                app:met_floatingLabel="highlight" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnAdd"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="18dp"
+                android:background="@drawable/button_bluelogin"
+                android:text="Tambah"
+                android:textColor="@color/bgLogin"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
 
 

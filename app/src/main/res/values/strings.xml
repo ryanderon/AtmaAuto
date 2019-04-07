@@ -20,4 +20,18 @@
     <string name="about">ABOUT</string>
     <string name="website">WEBSITE</string>
     <string name="logout">LOG OUT</string>
+
+    <string-array name="position">
+        <item>DPN</item>
+        <item>TGH</item>
+        <item>BLK</item>
+    </string-array>
+
+    <string-array name="place">
+        <item>KACA</item>
+        <item>DUS</item>
+        <item>BAN</item>
+        <item>KAYU</item>
+    </string-array>
+
 </resources>
