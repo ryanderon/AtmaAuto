@@ -14,6 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".UI.AddSupplier" />
         <activity android:name=".UI.AddSparepart" />
+        <activity android:name=".UI.EditUser" />
         <activity
             android:name=".UI.Home"
             android:label="@string/title_activity_home"

@@ -34,7 +34,7 @@ public class AddSparepart extends AppCompatActivity {
 
     ImageView backButton;
     Button addButton;
-    EditText idSparepart, sparepartName, merk, stock, minStock, purchasePrice, sellPrice, placement, position, place, number, sparepartTypeName, idSparepartType;
+    EditText idSparepart, sparepartName, merk, stock, minStock, purchasePrice, sellPrice, placement, position, place, number, idSparepartType;
     TextView title;
     private List<Sparepart> SparepartBundle = new ArrayList<>();
     private int simpan = -1;
@@ -68,16 +68,15 @@ public class AddSparepart extends AppCompatActivity {
             idSparepart.setText(getIntent().getStringExtra("id"));
             sparepartName.setText(getIntent().getStringExtra("name"));
             merk.setText(getIntent().getStringExtra("merk"));
-            stock.setText(getIntent().getStringExtra("stock"));
-            minStock.setText(getIntent().getStringExtra("minstock"));
-            purchasePrice.setText(getIntent().getStringExtra("purchaseprice"));
-            sellPrice.setText(getIntent().getStringExtra("sellprice"));
+            stock.setText(""+getIntent().getIntExtra("stock", 0 ));
+            minStock.setText(""+getIntent().getIntExtra("minstock", 0 ));
+            purchasePrice.setText(""+getIntent().getDoubleExtra("purchaseprice", 0.00 ));
+            sellPrice.setText(""+getIntent().getDoubleExtra("sellprice", 0.00 ));
             placement.setText(getIntent().getStringExtra("placement"));
             position.setText(getIntent().getStringExtra("position"));
             place.setText(getIntent().getStringExtra("place"));
-            number.setText(getIntent().getStringExtra("number"));
-            sparepartTypeName.setText(getIntent().getStringExtra("type"));
-            idSparepartType.setText(getIntent().getStringExtra("idtype"));
+            number.setText(""+getIntent().getIntExtra("number", 0 ));
+            idSparepartType.setText(""+getIntent().getIntExtra("idtype", 0 ));
             addButton.setText("UBAH");
         }
 
@@ -123,7 +122,6 @@ public class AddSparepart extends AppCompatActivity {
         position = findViewById(R.id.position);
         place = findViewById(R.id.place);
         number = findViewById(R.id.number);
-        sparepartTypeName = findViewById(R.id.sparepartTypeName);
         idSparepartType = findViewById(R.id.idSparepartType);
         title = findViewById(R.id.title);
     }
@@ -162,9 +160,6 @@ public class AddSparepart extends AppCompatActivity {
         else if(number.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "nomor sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
-        else if(sparepartTypeName.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "tipe sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
-        }
         else if(idSparepartType.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "id tipe sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
@@ -180,7 +175,7 @@ public class AddSparepart extends AppCompatActivity {
 
                 ApiClient apiClient = retrofit.create(ApiClient.class);
 
-                Call<SparepartData> addSparepart = apiClient.addSparepart(idSparepart.getText().toString(), sparepartName.getText().toString(), merk.getText().toString(), stock.getText().toString(), minStock.getText().toString(), purchasePrice.getText().toString(), sellPrice.getText().toString(), placement.getText().toString(), position.getText().toString(), place.getText().toString(), number.getText().toString(), sparepartTypeName.getText().toString(), idSparepartType.getText().toString());
+                Call<SparepartData> addSparepart = apiClient.addSparepart(idSparepart.getText().toString(), sparepartName.getText().toString(), merk.getText().toString(), Integer.parseInt(stock.getText().toString()), Integer.parseInt(minStock.getText().toString()), Double.parseDouble(purchasePrice.getText().toString()), Double.parseDouble(sellPrice.getText().toString()), placement.getText().toString(), position.getText().toString(), place.getText().toString(), Integer.parseInt(number.getText().toString()),Integer.parseInt(idSparepartType.getText().toString()));
 
                 addSparepart.enqueue(new Callback<SparepartData>() {
                     @Override
@@ -238,9 +233,6 @@ public class AddSparepart extends AppCompatActivity {
         else if(number.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "nomor sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
-        else if(sparepartTypeName.getText().toString().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "tipe sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
-        }
         else if(idSparepartType.getText().toString().isEmpty()) {
             Toast.makeText(getApplicationContext(), "id tipe sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
@@ -256,7 +248,9 @@ public class AddSparepart extends AppCompatActivity {
 
                 ApiClient apiClient = retrofit.create(ApiClient.class);
 
-                Call<SparepartData> updateSparepart = apiClient.updateSparepart(idSparepart.getText().toString(), sparepartName.getText().toString(), merk.getText().toString(), stock.getText().toString(), minStock.getText().toString(), purchasePrice.getText().toString(), sellPrice.getText().toString(), placement.getText().toString(), position.getText().toString(), place.getText().toString(), number.getText().toString(), sparepartTypeName.getText().toString(), idSparepartType.getText().toString());
+                Toast.makeText(getApplicationContext(), merk.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                Call<SparepartData> updateSparepart = apiClient.updateSparepart(idSparepart.getText().toString(), sparepartName.getText().toString(), merk.getText().toString(), Integer.parseInt(stock.getText().toString()), Integer.parseInt(minStock.getText().toString()), Double.parseDouble(purchasePrice.getText().toString()), Double.parseDouble(sellPrice.getText().toString()), placement.getText().toString(), Integer.parseInt(idSparepartType.getText().toString()));
 
                 updateSparepart.enqueue(new Callback<SparepartData>() {
                     @Override
@@ -271,7 +265,7 @@ public class AddSparepart extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<SparepartData> call, Throwable t) {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Gagal Input Data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }catch (Exception e) {

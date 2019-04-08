@@ -19,19 +19,19 @@ public class Sparepart {
 
     @SerializedName("stock")
     @Expose
-    private String stock;
+    private int stock;
 
     @SerializedName("min_stock")
     @Expose
-    private String minStock;
+    private int minStock;
 
     @SerializedName("purchase_price")
     @Expose
-    private String purchasePrice;
+    private double purchasePrice;
 
     @SerializedName("sell_price")
     @Expose
-    private String sellPrice;
+    private double sellPrice;
 
     @SerializedName("placement")
     @Expose
@@ -47,7 +47,7 @@ public class Sparepart {
 
     @SerializedName("number")
     @Expose
-    private String number;
+    private int number;
 
 //    @SerializedName("image")
 //    @Expose
@@ -58,7 +58,7 @@ public class Sparepart {
     private String sparepartTypeName;
     @SerializedName("id_sparepart_type")
     @Expose
-    private String idSparepartType;
+    private int idSparepartType;
 
     /**
      * No args constructor for use in serialization
@@ -67,40 +67,6 @@ public class Sparepart {
     public Sparepart() {
     }
 
-    /**
-     *
-     * @param merk
-     * @param sellPrice
-     * @param placement
-     * @param position
-     * @param idSparepartType
-     * @param sparepartTypeName
-     * @param number
-     * @param idSparepart
-     * @param stock
-     * @param minStock
-     * @param sparepartName
-     * @param place
-     * @param purchasePrice
-//     * @param *image
-     */
-    public Sparepart(String idSparepart, String sparepartName, String merk, String stock, String minStock, String purchasePrice, String sellPrice, String placement, String position, String place, String number, /*String image ,*/ String sparepartTypeName, String idSparepartType) {
-        super();
-        this.idSparepart = idSparepart;
-        this.sparepartName = sparepartName;
-        this.merk = merk;
-        this.stock = stock;
-        this.minStock = minStock;
-        this.purchasePrice = purchasePrice;
-        this.sellPrice = sellPrice;
-        this.placement = placement;
-        this.position = position;
-        this.place = place;
-        this.number = number;
-/*        this.image = image; */
-        this.sparepartTypeName = sparepartTypeName;
-        this.idSparepartType = idSparepartType;
-    }
 
     public String getIdSparepart() {
         return idSparepart;
@@ -126,35 +92,35 @@ public class Sparepart {
         this.merk = merk;
     }
 
-    public String getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
-    public String getMinStock() {
+    public int getMinStock() {
         return minStock;
     }
 
-    public void setMinStock(String minStock) {
+    public void setMinStock(int minStock) {
         this.minStock = minStock;
     }
 
-    public String getPurchasePrice() {
+    public double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(String purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
-    public String getSellPrice() {
+    public double getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(String sellPrice) {
+    public void setSellPrice(double sellPrice) {
         this.sellPrice = sellPrice;
     }
 
@@ -182,11 +148,11 @@ public class Sparepart {
         this.place = place;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 /*
@@ -206,11 +172,11 @@ public class Sparepart {
         this.sparepartTypeName = sparepartTypeName;
     }
 
-    public String getIdSparepartType() {
+    public int getIdSparepartType() {
         return idSparepartType;
     }
 
-    public void setIdSparepartType(String idSparepartType) {
+    public void setIdSparepartType(int idSparepartType) {
         this.idSparepartType = idSparepartType;
     }
 

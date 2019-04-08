@@ -66,6 +66,11 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGIN, false);
     }
 
+    public String getKeyId()
+    {
+        return pref.getString(KEY_ID,"id");
+    }
+
     public void logoutUser(){
         editor.clear();
         editor.commit();
