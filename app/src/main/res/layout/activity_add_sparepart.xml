@@ -105,7 +105,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Stok"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -117,7 +117,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Stok Minimal"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -129,7 +129,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Harga Beli"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -141,7 +141,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Harga Jual"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -189,19 +189,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Nomor"
-                android:inputType="textPersonName"
-                app:met_floatingLabel="highlight" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/sparepartTypeName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="18dp"
-                android:ems="10"
-                android:hint="Tipe Sparepart"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
@@ -213,7 +201,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="ID Tipe Sparepart"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:met_floatingLabel="highlight" />
 
             <Button

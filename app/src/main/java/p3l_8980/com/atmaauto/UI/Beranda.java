@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import p3l_8980.com.atmaauto.Controller.UserData;
 import p3l_8980.com.atmaauto.R;
 import p3l_8980.com.atmaauto.Session.SessionManager;
 
@@ -83,6 +84,14 @@ public class Beranda extends AppCompatActivity {
             }
         });
 
+        guillotineMenu.findViewById(R.id.profile_group).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(Beranda.this, EditUser.class);
+                startActivity(intent);
+            }
+        });
+
         switch (getIntent().getIntExtra("addDialog",0)){
             case 0: bottombar.setSelectedItemId(R.id.navigation_beranda); switchfragment(R.id.navigation_beranda);break;
             case 1: bottombar.setSelectedItemId(R.id.navigation_supplier); switchfragment(R.id.navigation_supplier);break;
@@ -129,6 +138,7 @@ public class Beranda extends AppCompatActivity {
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
         return super.onCreateView(parent, name, context, attrs);
     }
+
     public void switchfragment(int id) {
         FragmentManager manager = getSupportFragmentManager();
         fragmentparams.removeRule(RelativeLayout.CENTER_IN_PARENT);
@@ -164,6 +174,10 @@ public class Beranda extends AppCompatActivity {
                  contentRight.setVisibility(View.INVISIBLE);
                  fab.show();
                  break;
+
+            case R.id.navigation_customer:
+                view_position = 3;
+                break;
         }
         fragmentlayout.setLayoutParams(fragmentparams);
     }
