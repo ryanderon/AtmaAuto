@@ -4,10 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +37,9 @@ public class AddSupplier extends AppCompatActivity {
     Button addButton;
     EditText supplierName,supplierAddress,supplierNumber;
     TextView title;
-    private List<Supplier> SupplierBundle = new ArrayList<>();
     private int simpan = -1;
     private String cek;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,5 +184,6 @@ public class AddSupplier extends AppCompatActivity {
             }
         }
     }
+
 
 }

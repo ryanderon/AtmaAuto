@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -27,6 +31,7 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView sparepart_name, stock, sell_price;
         CardView cardView;
+        ImageView sparepart_image;
 
         public LinearLayout topcard;
 
@@ -36,6 +41,7 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
             stock = (TextView) itemView.findViewById(R.id.stock);
             sell_price = (TextView) itemView.findViewById(R.id.sell_price);
             cardView = (CardView) itemView.findViewById(R.id.cardview_id);
+            sparepart_image = (ImageView) itemView.findViewById(R.id.sparepart_image);
             topcard = itemView.findViewById(R.id.topcard);
 
 
@@ -65,7 +71,8 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
         myViewHolder.sparepart_name.setText(mData.get(i).getSparepartName());
         myViewHolder.stock.setText("Stok : " + mData.get(i).getStock());
         myViewHolder.sell_price.setText("Harga : " + mData.get(i).getSellPrice());
-/*        myViewHolder.sparepart_img.setImageResource(mData.get(i).getImage() ); */
+        Picasso.get().load("https://p3l.yafetrakan.com/images/"+mData.get(i).getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
+        /*        myViewHolder.sparepart_img.setImageResource(mData.get(i).getImage() ); */
 
         final Sparepart data = mData.get(i);
         final int ifinal = myViewHolder.getAdapterPosition();
@@ -88,9 +95,10 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
                 intent.putExtra("number", data.getNumber());
                 intent.putExtra("type", data.getSparepartTypeName());
                 intent.putExtra("idtype", data.getIdSparepartType());
+                intent.putExtra("image", data.getImage());
                 mContext.startActivity(intent);
             }
-            });
+        });
 
 //        myViewHolder.sparepart_name.setText(data.getSparepartName());
 //        myViewHolder.stock.setText(data.getStock());

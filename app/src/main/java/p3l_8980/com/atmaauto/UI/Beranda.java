@@ -11,11 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,6 +30,7 @@ import p3l_8980.com.atmaauto.Session.SessionManager;
 import com.yalantis.guillotine.animation.GuillotineAnimation;
 
 public class Beranda extends AppCompatActivity {
+
     //View Variable
     Toolbar toolbar;
     FrameLayout root;
@@ -57,7 +61,7 @@ public class Beranda extends AppCompatActivity {
         bottombar = findViewById(R.id.NavigationBot);
         root = findViewById(R.id.root);
         contentHamburger = findViewById(R.id.content_hamburger);
-        contentRight = findViewById(R.id.content_right);
+//        contentRight = findViewById(R.id.content_right);
         fragmentlayout = findViewById(R.id.scrollView2);
         fragmentparams = (RelativeLayout.LayoutParams) fragmentlayout.getLayoutParams();
         fab = findViewById(R.id.fab);
@@ -75,7 +79,7 @@ public class Beranda extends AppCompatActivity {
                 .setClosedOnStart(true)
                 .build();
 
-        registerForContextMenu(contentRight);
+//        registerForContextMenu(contentRight);
 
         guillotineMenu.findViewById(R.id.logout_group).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +152,7 @@ public class Beranda extends AppCompatActivity {
                 manager.beginTransaction().replace(R.id.fragmentplace, new FragmentBeranda()).commit();
                 title.setText("Atma Auto");
                 fragmentparams.addRule(RelativeLayout.CENTER_IN_PARENT);
-                contentRight.setVisibility(View.INVISIBLE);
+//                contentRight.setVisibility(View.INVISIBLE);
                 fab.hide();
                 break;
             case R.id.navigation_supplier:
@@ -159,7 +163,7 @@ public class Beranda extends AppCompatActivity {
                 fragmentparams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
                 // VIEW
                 title.setText("Data Supplier");
-                contentRight.setVisibility(View.INVISIBLE);
+                //                contentRight.setVisibility(View.INVISIBLE);
                 fab.show();
                 break;
 
@@ -171,7 +175,7 @@ public class Beranda extends AppCompatActivity {
                  fragmentparams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
                  //VIEW
                  title.setText("Data Sparepart");
-                 contentRight.setVisibility(View.INVISIBLE);
+//                 contentRight.setVisibility(View.INVISIBLE);
                  fab.show();
                  break;
 

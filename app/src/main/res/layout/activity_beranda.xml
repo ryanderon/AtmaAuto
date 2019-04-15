@@ -54,14 +54,8 @@
                     android:textColor="@color/bpDarker_blue"
                     android:textSize="@dimen/guillotine_item_text_size" />
 
-                <ImageView
-                    android:id="@+id/content_right"
-                    style="@style/ImageView.Hamburger"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
-                    android:src="@android:drawable/ic_menu_more"
-                    android:tint="@color/bpDarker_blue"/>
+
+
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
 

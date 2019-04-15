@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 import okhttp3.ResponseBody;
 import p3l_8980.com.atmaauto.Controller.ApiClient;
 import p3l_8980.com.atmaauto.Controller.Supplier;
+import p3l_8980.com.atmaauto.Controller.SupplierList;
 import p3l_8980.com.atmaauto.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,15 +27,19 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyViewHolder> {
 
-    private List<Supplier> SupplierBundle = new ArrayList<>();
+    private SupplierList SupplierBundle;
     private Context context;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+//    @Override
+//    public Filter getFilter() {
+//        return supplierFilter;
+//    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Nama, Alamat, Nomor;
         public LinearLayout topWraper;
         public LinearLayout bottomWraper;
@@ -46,24 +54,37 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
         }
     }
 
-    public AdapterSupplier(List<Supplier> SupplierBundle , Context context) {
+    public AdapterSupplier(SupplierList SupplierBundle , Context context) {
         this.SupplierBundle = SupplierBundle;
         this.context = context;
     }
+
+    public void setFilter(List<Supplier> newList){
+        SupplierBundle = new SupplierList();
+        SupplierBundle.getData().addAll(newList);
+        notifyDataSetChanged();
+
+        int i;
+        for (i=0; i<SupplierBundle.getData().size(); i++)
+        {
+        Log.d("supplierbundle",SupplierBundle.getData().get(i).getSupplierName());
+        }
+    }
+
 
     @NonNull
     @Override
     public AdapterSupplier.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // create a new view
-        View v = (View) LayoutInflater.from(viewGroup.getContext())
+        View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recyclesupplier, viewGroup, false);
         return new AdapterSupplier.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterSupplier.MyViewHolder vh, final int i) {
+    public void onBindViewHolder(@NonNull final AdapterSupplier.MyViewHolder vh, final int i) {
 
-        final Supplier data = SupplierBundle.get(i);
+        final Supplier data = SupplierBundle.getData().get(i);
         final int ifinal = vh.getAdapterPosition();
         vh.Nama.setText(data.getSupplierName());
         vh.Alamat.setText(data.getSupplierAddress());
@@ -90,11 +111,13 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
 
               ApiClient apiClient = retrofit.create(ApiClient.class);
 
-              Call<ResponseBody> deleteSupplier = apiClient.deleteSupplier(data.getIdSupplier());
+              Call<ResponseBody> deleteSupplier = apiClient.deleteSupplier(SupplierBundle.getData().get(i).getIdSupplier());
               deleteSupplier.enqueue(new Callback<ResponseBody>() {
                   @Override
                   public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                       if (response.code() == 200){
+//                          notifyItemRemoved(vh.getAdapterPosition());
+//                          notifyItemRangeChanged(vh.getAdapterPosition(), SupplierBundle.getData().size());
                           Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Supplier", Toast.LENGTH_SHORT).show();
                       }else{
                           Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
@@ -107,7 +130,7 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
                   }
               });
 
-                  SupplierBundle.remove(ifinal);
+                  SupplierBundle.getData().remove(ifinal);
                   notifyItemRemoved(ifinal);
                   notifyItemRangeChanged(ifinal, getItemCount());
             }
@@ -116,8 +139,42 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
 
     @Override
     public int getItemCount() {
-        return SupplierBundle.size();
+        return SupplierBundle.getData().size();
     }
 
-
+//    private Filter supplierFilter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint) {
+//            List<Supplier> filteredSupplier = new ArrayList<>() ;
+//
+//            if(constraint == null || constraint.length() == 0){
+//                filteredSupplier.addAll(SupplierBundleFull);
+//            }else{
+//                String filterPattern = constraint.toString().toLowerCase().trim();
+//                for (Supplier supplier : SupplierBundleFull){
+//                    if (supplier.getSupplierName().toLowerCase().contains(filterPattern)){
+//                        filteredSupplier.add(supplier);
+//                    }
+////                    else if(supplier.getSupplierAddress().toLowerCase().contains(filterPattern)){
+////                        filteredSupplier.add(supplier);
+////                    }
+////                    else {
+////                        filteredSupplier.add(supplier);
+////                    }
+//                }
+//            }
+//
+//            FilterResults results = new FilterResults();
+//            results.values = filteredSupplier;
+//            return results;
+//        }
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults results) {
+//            SupplierBundle.clear();
+//            SupplierBundle.addAll((List) results.values);
+//            notifyDataSetChanged();
+//        }
+//    };
 }
+
+

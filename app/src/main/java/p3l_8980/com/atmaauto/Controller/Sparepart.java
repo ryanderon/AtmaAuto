@@ -49,9 +49,9 @@ public class Sparepart {
     @Expose
     private int number;
 
-//    @SerializedName("image")
-//    @Expose
-//    private String image;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
     @SerializedName("sparepart_type_name")
     @Expose
@@ -155,7 +155,7 @@ public class Sparepart {
     public void setNumber(int number) {
         this.number = number;
     }
-/*
+
     public String getImage() {
         return image;
     }
@@ -163,7 +163,7 @@ public class Sparepart {
     public void setImage(String image) {
         this.image = image;
     }
-*/
+
     public String getSparepartTypeName() {
         return sparepartTypeName;
     }
