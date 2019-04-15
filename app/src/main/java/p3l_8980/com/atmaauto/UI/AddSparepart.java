@@ -410,4 +410,8 @@ public class AddSparepart extends AppCompatActivity {
 //                getResources().getStringArray(R.array.place));
 //        placeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        positionSpinner.setAdapter(placeAdapter);
+<<<<<<< HEAD
 //
+=======
+//
+>>>>>>> 10324de9ab3111fda45ca389489f89e5bf72373b
