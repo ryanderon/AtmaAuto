@@ -40,7 +40,6 @@ public class AddSupplier extends AppCompatActivity {
     private int simpan = -1;
     private String cek;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

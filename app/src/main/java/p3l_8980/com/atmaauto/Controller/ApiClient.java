@@ -49,9 +49,9 @@ public interface ApiClient {
     @GET("spareparts")
     Call<SparepartList> getSpareparts();
 
-    @Multipart
+
     @POST("spareparts")
-    @FormUrlEncoded
+    @Multipart
     Call<ResponseBody> addSparepart(@Part MultipartBody.Part image,
                                     @Part("id_sparepart") RequestBody id_sparepart,
                                     @Part("sparepart_name") RequestBody sparepart_name,
@@ -61,24 +61,26 @@ public interface ApiClient {
                                     @Part("purchase_price") RequestBody purchase_price,
                                     @Part("sell_price") RequestBody sell_price,
                                     @Part("placement") RequestBody placement,
-                                    @Part("position") RequestBody position,
-                                    @Part("place") RequestBody place,
-                                    @Part("number") RequestBody number,
                                     @Part("id_sparepart_type") RequestBody id_sparepart_type);
 
     @DELETE("spareparts/{id}")
     Call<ResponseBody> deleteSparepart(@Path("id") String id);
 
-    @PUT("spareparts/{id}")
-    @FormUrlEncoded
-    Call<SparepartData> updateSparepart(@Path("id") String id,
-                                        @Field("sparepart_name") String sparepart_name,
-                                        @Field("merk") String merk,
-                                        @Field("stock") int stock,
-                                        @Field("min_stock") int min_stock,
-                                        @Field("purchase_price") double purchase_price,
-                                        @Field("sell_price") double sell_price,
-                                        @Field("placement") String placement,
-                                        @Field("id_sparepart_type") int id_sparepart_type);
+    @POST("updatesparepart/{id}")
+    @Multipart
+    Call<ResponseBody> updateSparepart( @Path("id") String id,
+                                        @Part MultipartBody.Part image,
+                                        @Part("sparepart_name") RequestBody sparepart_name,
+                                        @Part("merk") RequestBody merk,
+                                        @Part("stock") RequestBody stock,
+                                        @Part("min_stock") RequestBody min_stock,
+                                        @Part("purchase_price") RequestBody purchase_price,
+                                        @Part("sell_price") RequestBody sell_price,
+                                        @Part("placement") RequestBody placement,
+                                        @Part("id_sparepart_type") RequestBody id_sparepart_type);
+
+    @GET("sparepart_types")
+    Call<SparepartTypeList> getSparepartTypes();
+
 
 }
