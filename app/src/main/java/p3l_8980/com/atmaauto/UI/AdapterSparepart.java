@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,13 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import p3l_8980.com.atmaauto.Controller.Sparepart;
+import p3l_8980.com.atmaauto.Controller.SparepartList;
 import p3l_8980.com.atmaauto.R;
 
 public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyViewHolder> {
 
     private Context mContext;
-    private List<Sparepart> mData = new ArrayList<>();
+    private SparepartList SparepartBundle;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView sparepart_name, stock, sell_price;
@@ -50,10 +52,23 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
         }
     }
 
-    public AdapterSparepart(List<Sparepart> mData, Context mContext) {
+    public AdapterSparepart(SparepartList SparepartBundle, Context mContext) {
         this.mContext = mContext;
-        this.mData = mData;
+        this.SparepartBundle = SparepartBundle;
     }
+
+    public void setFilter(List<Sparepart> newList){
+        SparepartBundle = new SparepartList();
+        SparepartBundle.getData().addAll(newList);
+        notifyDataSetChanged();
+        int i;
+        for (i=0; i<SparepartBundle.getData().size(); i++)
+        {
+            Log.d("sparepartbundle",SparepartBundle.getData().get(i).getSparepartName());
+        }
+
+    }
+
 
     @NonNull
     @Override
@@ -68,13 +83,15 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
     @Override
     public void onBindViewHolder(@NonNull AdapterSparepart.MyViewHolder myViewHolder, final int i) {
 
-        myViewHolder.sparepart_name.setText(mData.get(i).getSparepartName());
-        myViewHolder.stock.setText("Stok : " + mData.get(i).getStock());
-        myViewHolder.sell_price.setText("Harga : " + mData.get(i).getSellPrice());
-        Picasso.get().load("https://p3l.yafetrakan.com/images/"+mData.get(i).getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
-
-        final Sparepart data = mData.get(i);
+        final Sparepart data = SparepartBundle.getData().get(i);
         final int ifinal = myViewHolder.getAdapterPosition();
+
+
+        myViewHolder.sparepart_name.setText(data.getSparepartName());
+        myViewHolder.stock.setText("Stok : " + data.getStock());
+        myViewHolder.sell_price.setText("Harga : " + data.getSellPrice());
+        Picasso.get().load("https://p3l.yafetrakan.com/images/"+data.getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
+
 
         myViewHolder.topcard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +124,7 @@ public class AdapterSparepart extends RecyclerView.Adapter<AdapterSparepart.MyVi
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return SparepartBundle.getData().size();
     }
 
 

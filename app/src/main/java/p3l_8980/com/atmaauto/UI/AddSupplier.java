@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AddSupplier extends AppCompatActivity {
 
     ImageView backButton;
-    Button addButton;
+    Button addButton, editButton;
     EditText supplierName,supplierAddress,supplierNumber;
     TextView title;
     private int simpan = -1;
@@ -48,11 +48,27 @@ public class AddSupplier extends AppCompatActivity {
         simpan = getIntent().getIntExtra("simpan",-1);
 
         if(simpan > -1){
+            title.setText(getIntent().getStringExtra("name"));
+            supplierName.setText(getIntent().getStringExtra("name"));
+            EditText suppliername = (EditText) findViewById(R.id.supplierName);
+            suppliername.setFocusable(false);
+            suppliername.setClickable(true);
+
+            supplierAddress.setText(getIntent().getStringExtra("address"));
+            EditText supplieraddress = (EditText) findViewById(R.id.supplierAddress);
+            supplieraddress.setFocusable(false);
+            supplieraddress.setClickable(true);
+
+            supplierNumber.setText(getIntent().getStringExtra("number"));
+            EditText suppliernumber = (EditText) findViewById(R.id.supplierNumber);
+            suppliernumber.setFocusable(false);
+            suppliernumber.setClickable(true);
+
+
+            addButton.setVisibility(View.GONE);
+            addButton.setText("UBAH");
 //            final Supplier data = SupplierBundle.get(simpan);
-              title.setText("Ubah Supplier");
-              supplierName.setText(getIntent().getStringExtra("name"));
-              supplierAddress.setText(getIntent().getStringExtra("address"));
-              supplierNumber.setText(getIntent().getStringExtra("number"));
+
         }
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +77,27 @@ public class AddSupplier extends AppCompatActivity {
                 final Intent intent = new Intent(AddSupplier.this, Beranda.class);
                 intent.putExtra("addDialog", 1);
                 startActivity(intent);
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addButton.setVisibility(View.VISIBLE);
+                addButton.setText("UBAH");
+                supplierName.setText(getIntent().getStringExtra("name"));
+                EditText suppliername = (EditText) findViewById(R.id.supplierName);
+                suppliername.setFocusableInTouchMode(true);
+
+                supplierAddress.setText(getIntent().getStringExtra("address"));
+                EditText supplieraddress = (EditText) findViewById(R.id.supplierAddress);
+                supplieraddress.setFocusableInTouchMode(true);
+
+                supplierNumber.setText(getIntent().getStringExtra("number"));
+                EditText suppliernumber = (EditText) findViewById(R.id.supplierNumber);
+                suppliernumber.setFocusableInTouchMode(true);
+
+
             }
         });
 
@@ -86,6 +123,7 @@ public class AddSupplier extends AppCompatActivity {
     private void init(){
         backButton = findViewById(R.id.btnBack);
         addButton = findViewById(R.id.btnAdd);
+        editButton = findViewById(R.id.btnEdit);
         supplierName = findViewById(R.id.supplierName);
         supplierAddress = findViewById(R.id.supplierAddress);
         supplierNumber = findViewById(R.id.supplierNumber);

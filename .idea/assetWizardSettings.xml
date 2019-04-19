@@ -24,6 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="paddingPercent" value="15" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -35,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/E:/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_back_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_edit_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,8 +57,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_action_back" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="outputName" value="ic_action_edit" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="0098ff" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -74,17 +76,6 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
-                                      <entry key="foregroundClipartAsset">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="url" value="jar:file:/E:/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_store_mall_directory_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>

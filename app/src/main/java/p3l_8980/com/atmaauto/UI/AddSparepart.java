@@ -135,7 +135,7 @@ public class AddSparepart extends AppCompatActivity {
 
         if(simpan > -1){
 //            final Supplier data = SupplierBundle.get(simpan);
-            title.setText("Ubah Sparepart");
+            title.setText(getIntent().getStringExtra("name"));
             idSparepart.setText(getIntent().getStringExtra("id"));
             sparepartName.setText(getIntent().getStringExtra("name"));
             merk_sparepart.setText(getIntent().getStringExtra("merk"));

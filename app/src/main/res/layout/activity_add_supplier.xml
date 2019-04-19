@@ -38,6 +38,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <Button
+        android:id="@+id/btnEdit"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="360dp"
+        android:layout_marginVertical="20dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ic_action_edit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/bgLogin"
+        android:textSize="16sp"
+        tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:layout_width="374dp"
         android:layout_height="wrap_content"
@@ -48,6 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title">
+
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/supplierName"
@@ -97,6 +114,8 @@
             android:textColor="@color/bgLogin"
             android:textSize="16sp"
         />
+
+
 
     </LinearLayout>
 
