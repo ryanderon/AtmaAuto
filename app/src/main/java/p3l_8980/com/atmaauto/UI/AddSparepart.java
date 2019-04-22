@@ -1,6 +1,7 @@
 package p3l_8980.com.atmaauto.UI;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -57,11 +58,12 @@ public class AddSparepart extends AppCompatActivity {
 
     Bitmap ImageBitmap;
     ImageView backButton;
-    Button addButton, btn_add_image;
+    Button addButton, btn_add_image, editButton, deleteButton;
     ImageView add_sparepart_image;
     int Image_Request_Code = 1;
     Uri FilePathUri,FilePathUri2;
     Spinner spinnerType,spinnerPosition,spinnerPlace;
+    private Context context;
     EditText idSparepart, sparepartName, merk_sparepart, stock_sparepart, minStock, purchasePrice, sellPrice, placement_sparepart, position_sparepart, place_sparepart, number_sparepart, idSparepartType;
     TextView title;
     private List<Sparepart> SparepartBundle = new ArrayList<>();
@@ -90,6 +92,43 @@ public class AddSparepart extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
 
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                ApiClient apiClient = retrofit.create(ApiClient.class);
+                final Intent intent = new Intent(AddSparepart.this, Beranda.class);
+                intent.putExtra("addDialog", 2);
+                startActivity(intent);
+
+                Call<ResponseBody> deleteSparepart = apiClient.deleteSparepart(idSparepart.getText().toString());
+                deleteSparepart.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.code() == 200){
+                            Toast.makeText(getApplicationContext(), "Berhasil hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Gagal hapus data Sparepart", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+//                SparepartBundle.getData();
+//                notifyItemRemoved(ifinal);
+//                notifyItemRangeChanged(ifinal, getItemCount());
             }
         });
 
@@ -137,18 +176,71 @@ public class AddSparepart extends AppCompatActivity {
 //            final Supplier data = SupplierBundle.get(simpan);
             title.setText(getIntent().getStringExtra("name"));
             idSparepart.setText(getIntent().getStringExtra("id"));
+            EditText idsparepart = (EditText) findViewById(R.id.idSparepart);
+            idsparepart.setFocusable(false);
+            idsparepart.setClickable(true);
+
             sparepartName.setText(getIntent().getStringExtra("name"));
+            EditText sparepartname = (EditText) findViewById(R.id.sparepartName);
+            sparepartname.setFocusable(false);
+            sparepartname.setClickable(true);
+
             merk_sparepart.setText(getIntent().getStringExtra("merk"));
+            EditText merksparepart = (EditText) findViewById(R.id.merk_sparepart);
+            merksparepart.setFocusable(false);
+            merksparepart.setClickable(true);
+
             stock_sparepart.setText(""+getIntent().getIntExtra("stock", 0 ));
+            EditText stocksparepart = (EditText) findViewById(R.id.stock_sparepart);
+            stocksparepart.setFocusable(false);
+            stocksparepart.setClickable(true);
+
             minStock.setText(""+getIntent().getIntExtra("minstock", 0 ));
+            EditText minstock = (EditText) findViewById(R.id.minStock);
+            minstock.setFocusable(false);
+            minstock.setClickable(true);
+
             purchasePrice.setText(""+getIntent().getDoubleExtra("purchaseprice", 0.00 ));
+            EditText purchaseprice = (EditText) findViewById(R.id.purchasePrice);
+            purchaseprice.setFocusable(false);
+            purchaseprice.setClickable(true);
+
             sellPrice.setText(""+getIntent().getDoubleExtra("sellprice", 0.00 ));
+            EditText sellprice = (EditText) findViewById(R.id.sellPrice);
+            sellprice.setFocusable(false);
+            sellprice.setClickable(true);
+
             placement_sparepart.setText(getIntent().getStringExtra("placement"));
+            EditText placement = (EditText) findViewById(R.id.placement_sparepart);
+            placement.setFocusable(false);
+            placement.setClickable(true);
+
             Log.d("type",getIntent().getStringExtra("type"));
+            Spinner type = (Spinner) findViewById(R.id.idSparepartType);
+            type.setFocusable(false);
+            type.setClickable(true);
+
             spinnerPosition.setSelection(getIndex(spinnerPosition,getIntent().getStringExtra("position")));
+            Spinner postition = (Spinner) findViewById(R.id.position_sparepart);
+            postition.setFocusable(false);
+            postition.setClickable(true);
+
             spinnerPlace.setSelection(getIndex(spinnerPlace,getIntent().getStringExtra("place")));
+            Spinner place = (Spinner) findViewById(R.id.place_sparepart);
+            place.setFocusable(false);
+            place.setClickable(true);
+
             number_sparepart.setText(""+getIntent().getIntExtra("number", 0 ));
+            EditText number = (EditText) findViewById(R.id.number_sparepart);
+            number.setFocusable(false);
+            number.setClickable(true);
+
+
+            btn_add_image.setVisibility(View.GONE);
+
+            addButton.setVisibility(View.GONE);
             addButton.setText("UBAH");
+
             Picasso.get().load("https://p3l.yafetrakan.com/images/"+getIntent().getStringExtra("image")).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(add_sparepart_image);
         }
 
@@ -158,6 +250,66 @@ public class AddSparepart extends AppCompatActivity {
                 final Intent intent = new Intent(AddSparepart.this, Beranda.class);
                 intent.putExtra("addDialog", 1);
                 startActivity(intent);
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addButton.setVisibility(View.VISIBLE);
+                addButton.setText("UBAH");
+
+                editButton.setVisibility(View.VISIBLE);
+
+                idSparepart.setText(getIntent().getStringExtra("id"));
+                EditText idsparepart = (EditText) findViewById(R.id.idSparepart);
+                idsparepart.setFocusableInTouchMode(true);
+
+                sparepartName.setText(getIntent().getStringExtra("name"));
+                EditText sparepartname = (EditText) findViewById(R.id.sparepartName);
+                sparepartname.setFocusableInTouchMode(true);
+
+                merk_sparepart.setText(getIntent().getStringExtra("merk"));
+                EditText merksparepart = (EditText) findViewById(R.id.merk_sparepart);
+                merksparepart.setFocusableInTouchMode(true);
+
+                stock_sparepart.setText(""+getIntent().getIntExtra("stock", 0 ));
+                EditText stocksparepart = (EditText) findViewById(R.id.stock_sparepart);
+                stocksparepart.setFocusableInTouchMode(true);
+
+                minStock.setText(""+getIntent().getIntExtra("minstock", 0 ));
+                EditText minstock = (EditText) findViewById(R.id.minStock);
+                minstock.setFocusableInTouchMode(true);
+
+                purchasePrice.setText(""+getIntent().getDoubleExtra("purchaseprice", 0.00 ));
+                EditText purchaseprice = (EditText) findViewById(R.id.purchasePrice);
+                purchaseprice.setFocusableInTouchMode(true);
+
+                sellPrice.setText(""+getIntent().getDoubleExtra("sellprice", 0.00 ));
+                EditText sellprice = (EditText) findViewById(R.id.sellPrice);
+                sellprice.setFocusableInTouchMode(true);
+
+                placement_sparepart.setText(getIntent().getStringExtra("placement"));
+                EditText placement = (EditText) findViewById(R.id.placement_sparepart);
+                placement.setFocusableInTouchMode(true);
+
+
+                Log.d("type", getIntent().getStringExtra("type"));
+                Spinner type = (Spinner) findViewById(R.id.idSparepartType);
+                type.setFocusableInTouchMode(true);
+
+                spinnerPosition.setSelection(getIndex(spinnerPosition, getIntent().getStringExtra("position")));
+                Spinner postition = (Spinner) findViewById(R.id.position_sparepart);
+                postition.setFocusableInTouchMode(true);
+
+                spinnerPlace.setSelection(getIndex(spinnerPlace, getIntent().getStringExtra("place")));
+                Spinner place = (Spinner) findViewById(R.id.place_sparepart);
+                place.setFocusableInTouchMode(true);
+
+                number_sparepart.setText("" + getIntent().getIntExtra("number", 0));
+                EditText number = (EditText) findViewById(R.id.number_sparepart);
+                number.setFocusableInTouchMode(true);
+
             }
         });
 
@@ -250,6 +402,8 @@ public class AddSparepart extends AppCompatActivity {
     private void init(){
         backButton = findViewById(R.id.btnBack);
         addButton = findViewById(R.id.btnAdd);
+        editButton = findViewById(R.id.btnEdit);
+        deleteButton = findViewById(R.id.btnDelete);
         idSparepart = findViewById(R.id.idSparepart);
         sparepartName = findViewById(R.id.sparepartName);
         merk_sparepart = findViewById(R.id.merk_sparepart);

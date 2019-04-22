@@ -104,6 +104,7 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
         vh.bottomWraper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
               Retrofit retrofit = new retrofit2.Retrofit.Builder()
                         .baseUrl("https://p3l.yafetrakan.com/api/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -142,39 +143,6 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
         return SupplierBundle.getData().size();
     }
 
-//    private Filter supplierFilter = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence constraint) {
-//            List<Supplier> filteredSupplier = new ArrayList<>() ;
-//
-//            if(constraint == null || constraint.length() == 0){
-//                filteredSupplier.addAll(SupplierBundleFull);
-//            }else{
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//                for (Supplier supplier : SupplierBundleFull){
-//                    if (supplier.getSupplierName().toLowerCase().contains(filterPattern)){
-//                        filteredSupplier.add(supplier);
-//                    }
-////                    else if(supplier.getSupplierAddress().toLowerCase().contains(filterPattern)){
-////                        filteredSupplier.add(supplier);
-////                    }
-////                    else {
-////                        filteredSupplier.add(supplier);
-////                    }
-//                }
-//            }
-//
-//            FilterResults results = new FilterResults();
-//            results.values = filteredSupplier;
-//            return results;
-//        }
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results) {
-//            SupplierBundle.clear();
-//            SupplierBundle.addAll((List) results.values);
-//            notifyDataSetChanged();
-//        }
-//    };
 }
 
 

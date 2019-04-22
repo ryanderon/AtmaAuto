@@ -146,23 +146,3 @@ public class FragmentSupplier extends Fragment{
     }
 
 }
-
-//Dari YUDHA
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//
-//        super.onCreateOptionsMenu(menu,inflater);
-//        inflater.inflate(R.menu.menu, menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//            }
-//        });
-//    }

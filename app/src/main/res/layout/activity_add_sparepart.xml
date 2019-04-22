@@ -13,9 +13,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".UI.AddSupplier"
         android:background="@color/bgLogin"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:context=".UI.AddSupplier">
 
         <TextView
             android:id="@+id/title"
@@ -48,6 +48,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/btnEdit"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="364dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_action_edit"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="185dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="186dp"
+            android:background="@drawable/ic_action_delete"
+            android:textColor="@color/bgLogin"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+
         <LinearLayout
             android:layout_width="380dp"
             android:layout_height="wrap_content"
@@ -65,18 +95,18 @@
                 android:id="@+id/add_sparepart_image"
                 android:layout_width="300dp"
                 android:layout_height="190dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
-                app:srcCompat="@drawable/ic_menu_gallery"/>
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/ic_menu_gallery" />
 
             <Button
-                android:layout_below="@id/btn_add_image"
                 android:id="@+id/btn_add_image"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_below="@id/btn_add_image"
                 android:layout_marginLeft="120dp"
-                android:text="PILIH GAMBAR"/>
+                android:layout_marginTop="10dp"
+                android:text="PILIH GAMBAR" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/idSparepart"
@@ -182,7 +212,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Tipe Sparepart"
-                app:met_floatingLabel="highlight"/>
+                app:met_floatingLabel="highlight" />
 
             <Spinner
                 android:id="@+id/position_sparepart"
@@ -193,7 +223,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Posisi"
-                app:met_floatingLabel="highlight"/>
+                app:met_floatingLabel="highlight" />
 
             <Spinner
                 android:id="@+id/place_sparepart"
@@ -204,7 +234,7 @@
                 android:layout_marginEnd="18dp"
                 android:ems="10"
                 android:hint="Penempatan"
-                app:met_floatingLabel="highlight"/>
+                app:met_floatingLabel="highlight" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/number_sparepart"
@@ -233,8 +263,6 @@
                 android:textSize="16sp" />
 
         </LinearLayout>
-
-
 
 
     </android.support.constraint.ConstraintLayout>
