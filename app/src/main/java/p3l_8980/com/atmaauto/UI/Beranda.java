@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import p3l_8980.com.atmaauto.Controller.UserData;
 import p3l_8980.com.atmaauto.R;
 import p3l_8980.com.atmaauto.Session.SessionManager;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.yalantis.guillotine.animation.GuillotineAnimation;
 
 public class Beranda extends AppCompatActivity {
@@ -51,6 +53,7 @@ public class Beranda extends AppCompatActivity {
         setContentView(R.layout.activity_beranda);
         session = new SessionManager(Beranda.this);
         IntializeView();
+        
         // Shared Data
     }
 
