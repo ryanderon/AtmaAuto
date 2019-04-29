@@ -39,19 +39,6 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
 //        return supplierFilter;
 //    }
 
-    public void clear() {
-        SupplierBundle = new SupplierList();
-        SupplierBundle.getData().clear();
-        notifyDataSetChanged();
-    }
-
-    // Add a list of items -- change to type used
-    public void addAll(List<Supplier> list) {
-        SupplierBundle = new SupplierList();
-        SupplierBundle.getData().addAll(list);
-        notifyDataSetChanged();
-    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView Nama, Alamat, Nomor;
         public LinearLayout topWraper;
