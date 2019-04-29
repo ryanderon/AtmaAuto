@@ -1,9 +1,11 @@
 package p3l_8980.com.atmaauto.UI;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import p3l_8980.com.atmaauto.Controller.ApiClient;
 import p3l_8980.com.atmaauto.Controller.Supplier;
@@ -45,14 +48,13 @@ public class FragmentSupplier extends Fragment{
     private List<Supplier> SupplierBundleFull;
     private AdapterSupplier supplierAdapter;
     private SupplierList supplierList1;
-
-
     SessionManager session;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
 
@@ -108,6 +110,7 @@ public class FragmentSupplier extends Fragment{
 
         session = new SessionManager(getContext());
         session.checkLogin();
+
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
                 .baseUrl("https://p3l.yafetrakan.com/api/")
