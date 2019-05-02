@@ -33,5 +33,12 @@
         <item>BAN</item>
         <item>KAYU</item>
     </string-array>
+    <string name="title_activity_add_procurement">AddProcurement</string>
+
+    <string-array name="procurementstatus">
+        <item>Unprocessed</item>
+        <item>On Progress</item>
+        <item>Finish</item>
+    </string-array>
 
 </resources>

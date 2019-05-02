@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".UI.UpdateVerification"></activity>
+        <activity android:name=".UI.VerificationProcurement" />
+        <activity
+            android:name=".UI.AddProcurement"
+            android:label="@string/title_activity_add_procurement"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UI.AddSupplier" />
         <activity android:name=".UI.AddSparepart" />
         <activity android:name=".UI.EditUser" />
@@ -26,25 +32,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Beranda" />
-        <!-- [START fcm_default_icon] -->
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-             See README(https://goo.gl/l4GJaQ) for more. -->
+        <activity android:name=".UI.Beranda" /> <!-- [START fcm_default_icon] -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
-        <!-- [END fcm_default_icon] -->
+            android:resource="@color/colorAccent" /> <!-- [END fcm_default_icon] -->
         <service android:name=".Notification.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".Notification.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

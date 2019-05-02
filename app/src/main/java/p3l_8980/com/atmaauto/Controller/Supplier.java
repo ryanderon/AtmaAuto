@@ -39,6 +39,12 @@ public class Supplier {
         this.supplierPhoneNumber = supplierPhoneNumber;
     }
 
+    public Supplier(int idSupplier, String supplierName) {
+        super();
+        this.idSupplier = idSupplier;
+        this.supplierName = supplierName;
+    }
+
     public int getIdSupplier() {
         return idSupplier;
     }
@@ -69,5 +75,20 @@ public class Supplier {
 
     public void setSupplierPhoneNumber(String supplierPhoneNumber) {
         this.supplierPhoneNumber = supplierPhoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return supplierName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Supplier){
+            Supplier c = (Supplier) obj;
+            if(c.getSupplierName().equals(supplierName) && c.getIdSupplier()==idSupplier ) return true;
+        }
+
+        return false;
     }
 }

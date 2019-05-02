@@ -19,4 +19,7 @@
     <color name="endblue">#0bcce6</color>
     <color name="ColorAccent">#ff4081</color>
     <color name="mariner">#2c82c9</color>
+    <color name="greensuccess">#45f62d</color>
+    <color name="redalert">#f62d30</color>
+    <color name="yellowwarning">#f6d82d</color>
 </resources>

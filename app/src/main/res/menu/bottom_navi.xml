@@ -16,7 +16,7 @@
         android:title="@string/title_sparepart" />
 
     <item
-        android:id="@+id/navigation_customer"
-        android:icon="@drawable/ic_action_customer"
-        android:title="@string/title_customer" />
+        android:id="@+id/navigation_procurement"
+        android:icon="@drawable/ic_action_procurements"
+        android:title="Pengadaan" />
 </menu>

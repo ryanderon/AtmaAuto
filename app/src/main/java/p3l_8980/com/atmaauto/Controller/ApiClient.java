@@ -1,5 +1,7 @@
 package p3l_8980.com.atmaauto.Controller;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -46,6 +48,9 @@ public interface ApiClient {
                                       @Field("supplier_address") String supplier_address,
                                       @Field("supplier_phone_number") String supplier_phone_number);
 
+    @GET("spareparts/{id}")
+    Call<SparepartData> getSparepart(@Path("id") String id);
+
     @GET("spareparts")
     Call<SparepartList> getSpareparts();
 
@@ -79,8 +84,52 @@ public interface ApiClient {
                                         @Part("placement") RequestBody placement,
                                         @Part("id_sparepart_type") RequestBody id_sparepart_type);
 
+    @PUT("updatesparepartmobile/{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> updateSparepartVerif(@Path("id") String id,@Field("sell_price") double sell_price,
+                                      @Field("price") double price,
+                                      @Field("amount") int amount);
+
     @GET("sparepart_types")
     Call<SparepartTypeList> getSparepartTypes();
+
+    @GET("procurements")
+    Call<ProcurementList> getProcurement();
+
+    @DELETE("procurements/{id}")
+    Call<ResponseBody> deleteProcurement(@Path("id") int id);
+
+    @POST("procurements")
+    @FormUrlEncoded
+    Call<ResponseBody> addProcurement(@Field("date") String date,
+                                      @Field("procurement_status") String procurement_status,
+                                      @Field("id_sales") int id_sales);
+
+    @PUT("procurements/{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> updateProcurement(@Path("id") int id,@Field("date") String date,
+                                      @Field("procurement_status") String procurement_status,
+                                      @Field("id_sales") int id_sales);
+
+    @POST("procurementDetails")
+    @FormUrlEncoded
+    Call<ResponseBody> addProcurementDetail(@Field("price") double price,
+                                      @Field("amount") int amount,
+                                      @Field("subtotal") double subtotal,
+                                      @Field("id_sparepart") String idSparepart,
+                                      @Field("id_procurement") int idProcurement);
+
+    @PUT("procurementDetails/{id}")
+    @FormUrlEncoded
+    Call<ResponseBody> updateProcurementDetail(@Path("id") int id,@Field("subtotal") double subtotal,
+                                            @Field("price") double price,
+                                            @Field("amount") int amount);
+
+    @GET("procurementDetails/{id}")
+    Call<Detail> getProcurementDetail(@Path("id") int id);
+
+    @GET("sales")
+    Call<SalesList> getSales();
 
 
 }

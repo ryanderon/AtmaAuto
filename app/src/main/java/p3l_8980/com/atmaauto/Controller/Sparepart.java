@@ -67,6 +67,12 @@ public class Sparepart {
     public Sparepart() {
     }
 
+    public Sparepart(String idSparepart,String nama) {
+        super();
+        this.idSparepart=idSparepart;
+        this.sparepartName=nama;
+    }
+
 
     public String getIdSparepart() {
         return idSparepart;
@@ -180,4 +186,18 @@ public class Sparepart {
         this.idSparepartType = idSparepartType;
     }
 
+    @Override
+    public String toString() {
+        return sparepartName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Sparepart){
+            Sparepart c = (Sparepart) obj;
+            if(c.getSparepartName().equals(sparepartName) && c.getIdSparepart().equalsIgnoreCase(idSparepart) ) return true;
+        }
+
+        return false;
+    }
 }

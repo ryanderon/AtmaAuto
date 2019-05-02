@@ -103,7 +103,7 @@ public class Beranda extends AppCompatActivity {
             case 0: bottombar.setSelectedItemId(R.id.navigation_beranda); switchfragment(R.id.navigation_beranda);break;
             case 1: bottombar.setSelectedItemId(R.id.navigation_supplier); switchfragment(R.id.navigation_supplier);break;
             case 2: bottombar.setSelectedItemId(R.id.navigation_sparepart); switchfragment(R.id.navigation_sparepart);break;
-            case 3: bottombar.setSelectedItemId(R.id.navigation_customer); switchfragment(R.id.navigation_customer);break;
+            case 3: bottombar.setSelectedItemId(R.id.navigation_procurement); switchfragment(R.id.navigation_procurement);break;
         }
 
 
@@ -120,8 +120,8 @@ public class Beranda extends AppCompatActivity {
                     case R.id.navigation_sparepart:
                         if(view_position != 2) switchfragment(R.id.navigation_sparepart);
                         return true;
-                    case R.id.navigation_customer:
-                        if(view_position != 3) switchfragment(R.id.navigation_customer);
+                    case R.id.navigation_procurement:
+                        if(view_position != 3) switchfragment(R.id.navigation_procurement);
                         return true;
                 }
                 return false;
@@ -182,8 +182,14 @@ public class Beranda extends AppCompatActivity {
                  fab.show();
                  break;
 
-            case R.id.navigation_customer:
+            case R.id.navigation_procurement:
                 view_position = 3;
+                FragmentProcurement fragmentProcurement = new FragmentProcurement();
+                manager.beginTransaction().replace(R.id.fragmentplace, fragmentProcurement).commit();
+                fragmentparams.addRule(RelativeLayout.CENTER_IN_PARENT,0);
+                title.setText("Data Pengadaan");
+
+                fab.show();
                 break;
         }
         fragmentlayout.setLayoutParams(fragmentparams);
@@ -200,6 +206,11 @@ public class Beranda extends AppCompatActivity {
 
             case 2:
                 i = new Intent(Beranda.this, AddSparepart.class);
+                i.putExtra("simpan", -1);
+                startActivity(i);
+                break;
+            case 3 :
+                i = new Intent(Beranda.this, AddProcurement.class);
                 i.putExtra("simpan", -1);
                 startActivity(i);
                 break;
