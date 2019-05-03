@@ -109,6 +109,7 @@ public class AddSupplier extends AppCompatActivity {
                 }
             });
         }else{
+            editButton.setVisibility(View.GONE);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

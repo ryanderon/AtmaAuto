@@ -243,6 +243,10 @@ public class AddSparepart extends AppCompatActivity {
 
             Picasso.get().load("https://p3l.yafetrakan.com/images/"+getIntent().getStringExtra("image")).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(add_sparepart_image);
         }
+        else{
+            deleteButton.setVisibility(View.GONE);
+            editButton.setVisibility(View.GONE);
+        }
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -474,360 +478,458 @@ public class AddSparepart extends AppCompatActivity {
 
     public void store(){
 
-        final ProgressDialog progressDialog = new ProgressDialog(AddSparepart.this, R.style.AppTheme_Dark_Dialog);
-        progressDialog.setMessage("Memproses Data...");
-        progressDialog.show();
-        String place = idPosition +'-'+idPlace+'-'+number_sparepart.getText().toString();
-        Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiClient apiClient = retrofit.create(ApiClient.class);
-
-        if(ImageBitmap!=null) {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] data = baos.toByteArray();
-
-            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
-
-            RequestBody id_sparepart =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
-
-            RequestBody sparepart_name =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
-
-            RequestBody merk =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
-
-            RequestBody stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
-
-            RequestBody min_stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), minStock.getText().toString());
-
-            RequestBody purchase_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
-
-            RequestBody sell_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
-
-            RequestBody placement =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), place);
-
-
-            RequestBody id_sparepart_type =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), String.valueOf(idType));
-
-            MultipartBody.Part image = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-
-            Call<ResponseBody> call = apiClient.addSparepart(image,id_sparepart, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
-
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-
-//                mProgressBar.setVisibility(View.GONE);
-
-                    if (response.isSuccessful()) {
-
-                        ResponseBody responseBody = response.body();
-                        Log.d("SUKSES",responseBody.toString());
-                        Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        final Intent intent = new Intent(AddSparepart.this, Beranda.class);
-                        intent.putExtra("addDialog", 2);
-                        progressDialog.dismiss();
-                        startActivity(intent);
-//                    mBtImageShow.setVisibility(View.VISIBLE);
-//                     mImageUrl = URL + responseBody.getPath();
-//                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
-
-                    } else {
-                        progressDialog.dismiss();
-                        Log.d( "onResponse: ",response.message());
-                        Toast.makeText(AddSparepart.this, "Gagal", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    progressDialog.dismiss();
-                    Log.d("onFailure: ",t.toString());
-
-//                mProgressBar.setVisibility(View.GONE);
-//                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
-                }
-            });
+        if(idSparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "id sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(sparepartName.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "nama sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(merk_sparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "merk sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(stock_sparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "stock sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(stock_sparepart.getText().toString())==0){
+            Toast.makeText(getApplicationContext(), "stock sparepart tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(minStock.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "stock sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(minStock.getText().toString())==0){
+            Toast.makeText(getApplicationContext(), "stock minimal tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(purchasePrice.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "harga beli tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Double.parseDouble(purchasePrice.getText().toString()) == 0){
+            Toast.makeText(getApplicationContext(), "harga beli tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(sellPrice.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "harga beli tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Double.parseDouble(sellPrice.getText().toString())== 0){
+            Toast.makeText(getApplicationContext(), "harga jual tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(Double.parseDouble(sellPrice.getText().toString()) == Double.parseDouble(purchasePrice.getText().toString())){
+            Toast.makeText(getApplicationContext(), "harga jual tidak boleh sama dengan harga beli", Toast.LENGTH_SHORT).show();
+        }
+        else if(number_sparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"nomor sparepart tidak boleh kosong",Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(number_sparepart.getText().toString())==0){
+            Toast.makeText(getApplicationContext(), "nomor sparepart tidak boleh 0", Toast.LENGTH_SHORT).show();
         }
         else{
-            RequestBody id_sparepart =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
+            try{
+                final ProgressDialog progressDialog = new ProgressDialog(AddSparepart.this, R.style.AppTheme_Dark_Dialog);
+                progressDialog.setMessage("Memproses Data...");
+                progressDialog.show();
+                String place = idPosition +'-'+idPlace+'-'+number_sparepart.getText().toString();
+                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-            RequestBody sparepart_name =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
+                ApiClient apiClient = retrofit.create(ApiClient.class);
 
-            RequestBody merk =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
+                if(ImageBitmap!=null) {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
 
-            RequestBody stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
 
-            RequestBody min_stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), minStock.getText().toString());
+                    RequestBody id_sparepart =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
 
-            RequestBody purchase_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
+                    RequestBody sparepart_name =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
 
-            RequestBody sell_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
+                    RequestBody merk =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
 
-            RequestBody placement =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), place);
+                    RequestBody stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
+
+                    RequestBody min_stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), minStock.getText().toString());
+
+                    RequestBody purchase_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
+
+                    RequestBody sell_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
+
+                    RequestBody placement =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), place);
 
 
-            RequestBody id_sparepart_type =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), String.valueOf(idType));
+                    RequestBody id_sparepart_type =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), String.valueOf(idType));
 
-            MultipartBody.Part image = null;
+                    MultipartBody.Part image = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
 
-            Call<ResponseBody> call = apiClient.addSparepart(image,id_sparepart, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
+                    Call<ResponseBody> call = apiClient.addSparepart(image,id_sparepart, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
 
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
 
 //                mProgressBar.setVisibility(View.GONE);
 
-                    if (response.isSuccessful()) {
+                            if (response.isSuccessful()) {
 
-                        ResponseBody responseBody = response.body();
-                        Log.d("SUKSES",responseBody.toString());
-                        Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        final Intent intent = new Intent(AddSparepart.this, Beranda.class);
-                        intent.putExtra("addDialog", 2);
-                        progressDialog.dismiss();
-                        startActivity(intent);
+                                ResponseBody responseBody = response.body();
+                                Log.d("SUKSES",responseBody.toString());
+                                Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
+                                final Intent intent = new Intent(AddSparepart.this, Beranda.class);
+                                intent.putExtra("addDialog", 2);
+                                progressDialog.dismiss();
+                                startActivity(intent);
 //                    mBtImageShow.setVisibility(View.VISIBLE);
 //                     mImageUrl = URL + responseBody.getPath();
 //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
 
-                    } else {
-                        progressDialog.dismiss();
-                        Log.d( "onResponse: ",response.message());
-                        Toast.makeText(AddSparepart.this, "Gagal", Toast.LENGTH_SHORT).show();
+                            } else {
+                                progressDialog.dismiss();
+                                Log.d( "onResponse: ",response.message());
+                                Toast.makeText(AddSparepart.this, "Gagal", Toast.LENGTH_SHORT).show();
 
-                    }
-                }
+                            }
+                        }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    progressDialog.dismiss();
-                    Log.d("onFailure: ",t.toString());
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.d("onFailure: ",t.toString());
 
 //                mProgressBar.setVisibility(View.GONE);
 //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+                        }
+                    });
                 }
-            });
+                else{
+                    RequestBody id_sparepart =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
+
+                    RequestBody sparepart_name =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
+
+                    RequestBody merk =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
+
+                    RequestBody stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
+
+                    RequestBody min_stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), minStock.getText().toString());
+
+                    RequestBody purchase_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
+
+                    RequestBody sell_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
+
+                    RequestBody placement =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), place);
+
+
+                    RequestBody id_sparepart_type =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), String.valueOf(idType));
+
+                    MultipartBody.Part image = null;
+
+                    Call<ResponseBody> call = apiClient.addSparepart(image,id_sparepart, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
+
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+//                mProgressBar.setVisibility(View.GONE);
+
+                            if (response.isSuccessful()) {
+
+                                ResponseBody responseBody = response.body();
+                                Log.d("SUKSES",responseBody.toString());
+                                Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
+                                final Intent intent = new Intent(AddSparepart.this, Beranda.class);
+                                intent.putExtra("addDialog", 2);
+                                progressDialog.dismiss();
+                                startActivity(intent);
+//                    mBtImageShow.setVisibility(View.VISIBLE);
+//                     mImageUrl = URL + responseBody.getPath();
+//                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
+
+                            } else {
+                                progressDialog.dismiss();
+                                Log.d( "onResponse: ",response.message());
+                                Toast.makeText(AddSparepart.this, "Gagal", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.d("onFailure: ",t.toString());
+
+//                mProgressBar.setVisibility(View.GONE);
+//                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+                        }
+                    });
+                }
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void update(){
-
-        final ProgressDialog progressDialog = new ProgressDialog(AddSparepart.this, R.style.AppTheme_Dark_Dialog);
-        progressDialog.setMessage("Memproses Data...");
-        progressDialog.show();
-        String place = idPosition +"-"+idPlace+"-"+number_sparepart.getText().toString();
-        Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiClient apiClient = retrofit.create(ApiClient.class);
-        if(ImageBitmap!=null) {
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] data = baos.toByteArray();
-
-            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
-
-
-            RequestBody id_sparepart =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
-
-            RequestBody sparepart_name =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
-
-            RequestBody merk =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
-
-            RequestBody stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
-
-            RequestBody min_stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), minStock.getText().toString());
-
-            RequestBody purchase_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
-
-            RequestBody sell_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
-            RequestBody placement =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), place);
-
-            RequestBody id_sparepart_type =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), String.valueOf(idType));
-
-            MultipartBody.Part image = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
-
-
-            Call<ResponseBody> call = apiClient.updateSparepart(idSparepart.getText().toString(),image, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
-
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-
-                    //                mProgressBar.setVisibility(View.GONE);
-
-                    if (response.isSuccessful()) {
-
-                        ResponseBody responseBody = response.body();
-                        Log.d("SUKSES", responseBody.toString());
-                        Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        final Intent intent = new Intent(AddSparepart.this, Beranda.class);
-                        intent.putExtra("addDialog", 2);
-                        progressDialog.dismiss();
-                        startActivity(intent);
-                        //                    mBtImageShow.setVisibility(View.VISIBLE);
-                        //                     mImageUrl = URL + responseBody.getPath();
-                        //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
-
-                    } else {
-                        progressDialog.dismiss();
-                        Log.d("onResponse: ", response.message());
-                        Toast.makeText(AddSparepart.this, response.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    progressDialog.dismiss();
-                    Log.d("onFailure: ", t.toString());
-
-                    //                mProgressBar.setVisibility(View.GONE);
-                    //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
-                }
-            });
+        if(idSparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "id sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
-        else
-        {
-
-            RequestBody id_sparepart =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
-
-            RequestBody sparepart_name =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
-
-            RequestBody merk =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
-
-            RequestBody stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
-
-            RequestBody min_stock =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), minStock.getText().toString());
-
-            RequestBody purchase_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
-
-            RequestBody sell_price =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
-
-            RequestBody placement =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), place);
-
-            RequestBody id_sparepart_type =
-                    RequestBody.create(
-                            MediaType.parse("multipart/form-data"), String.valueOf(idType));
-
-            MultipartBody.Part image = null;
-
-            Call<ResponseBody> call = apiClient.updateSparepart(idSparepart.getText().toString(),image, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
-
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-
-
-                    if (response.isSuccessful()) {
-
-                        ResponseBody responseBody = response.body();
-                        Log.d("SUKSES", responseBody.toString());
-                        Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        final Intent intent = new Intent(AddSparepart.this, Beranda.class);
-                        intent.putExtra("addDialog", 2);
-                        progressDialog.dismiss();
-                        startActivity(intent);
-                        //                    mBtImageShow.setVisibility(View.VISIBLE);
-                        //                     mImageUrl = URL + responseBody.getPath();
-                        //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
-
-                    } else {
-                        progressDialog.dismiss();
-                        Log.d("onResponse: ", response.message());
-                        Toast.makeText(AddSparepart.this, response.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    progressDialog.dismiss();
-                    Log.d("onFailure: ", t.toString());
-
-                    //                mProgressBar.setVisibility(View.GONE);
-                    //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
-                }
-            });
+        else if(sparepartName.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "nama sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
+        else if(merk_sparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "merk sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(stock_sparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "stock sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(stock_sparepart.getText().toString())==0){
+            Toast.makeText(getApplicationContext(), "stock sparepart tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(minStock.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "stock sparepart tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(minStock.getText().toString())==0){
+            Toast.makeText(getApplicationContext(), "stock minimal tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(purchasePrice.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "harga beli tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Double.parseDouble(purchasePrice.getText().toString()) == 0){
+            Toast.makeText(getApplicationContext(), "harga beli tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(sellPrice.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "harga beli tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Double.parseDouble(sellPrice.getText().toString())== 0){
+            Toast.makeText(getApplicationContext(), "harga jual tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else if(Double.parseDouble(sellPrice.getText().toString()) == Double.parseDouble(purchasePrice.getText().toString())){
+            Toast.makeText(getApplicationContext(), "harga jual tidak boleh sama dengan harga beli", Toast.LENGTH_SHORT).show();
+        }
+        else if(number_sparepart.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"nomor sparepart tidak boleh kosong",Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(number_sparepart.getText().toString())==0){
+            Toast.makeText(getApplicationContext(), "nomor sparepart tidak boleh 0", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            try{
+                final ProgressDialog progressDialog = new ProgressDialog(AddSparepart.this, R.style.AppTheme_Dark_Dialog);
+                progressDialog.setMessage("Memproses Data...");
+                progressDialog.show();
+                String place = idPosition +"-"+idPlace+"-"+number_sparepart.getText().toString();
+                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                ApiClient apiClient = retrofit.create(ApiClient.class);
+                if(ImageBitmap!=null) {
+
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
+
+
+                    RequestBody id_sparepart =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
+
+                    RequestBody sparepart_name =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
+
+                    RequestBody merk =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
+
+                    RequestBody stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
+
+                    RequestBody min_stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), minStock.getText().toString());
+
+                    RequestBody purchase_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
+
+                    RequestBody sell_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
+                    RequestBody placement =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), place);
+
+                    RequestBody id_sparepart_type =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), String.valueOf(idType));
+
+                    MultipartBody.Part image = MultipartBody.Part.createFormData("image", "image.jpg", requestFile);
+
+
+                    Call<ResponseBody> call = apiClient.updateSparepart(idSparepart.getText().toString(),image, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
+
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+                            //                mProgressBar.setVisibility(View.GONE);
+
+                            if (response.isSuccessful()) {
+
+                                ResponseBody responseBody = response.body();
+                                Log.d("SUKSES", responseBody.toString());
+                                Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
+                                final Intent intent = new Intent(AddSparepart.this, Beranda.class);
+                                intent.putExtra("addDialog", 2);
+                                progressDialog.dismiss();
+                                startActivity(intent);
+                                //                    mBtImageShow.setVisibility(View.VISIBLE);
+                                //                     mImageUrl = URL + responseBody.getPath();
+                                //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
+
+                            } else {
+                                progressDialog.dismiss();
+                                Log.d("onResponse: ", response.message());
+                                Toast.makeText(AddSparepart.this, response.toString(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.d("onFailure: ", t.toString());
+
+                            //                mProgressBar.setVisibility(View.GONE);
+                            //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+                        }
+                    });
+                }
+                else
+                {
+
+                    RequestBody id_sparepart =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), idSparepart.getText().toString());
+
+                    RequestBody sparepart_name =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sparepartName.getText().toString());
+
+                    RequestBody merk =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), merk_sparepart.getText().toString());
+
+                    RequestBody stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), stock_sparepart.getText().toString());
+
+                    RequestBody min_stock =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), minStock.getText().toString());
+
+                    RequestBody purchase_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), purchasePrice.getText().toString());
+
+                    RequestBody sell_price =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), sellPrice.getText().toString());
+
+                    RequestBody placement =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), place);
+
+                    RequestBody id_sparepart_type =
+                            RequestBody.create(
+                                    MediaType.parse("multipart/form-data"), String.valueOf(idType));
+
+                    MultipartBody.Part image = null;
+
+                    Call<ResponseBody> call = apiClient.updateSparepart(idSparepart.getText().toString(),image, sparepart_name, merk, stock, min_stock, purchase_price, sell_price, placement, id_sparepart_type);
+
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
+
+
+                            if (response.isSuccessful()) {
+
+                                ResponseBody responseBody = response.body();
+                                Log.d("SUKSES", responseBody.toString());
+                                Toast.makeText(AddSparepart.this, "Sukses", Toast.LENGTH_SHORT).show();
+                                final Intent intent = new Intent(AddSparepart.this, Beranda.class);
+                                intent.putExtra("addDialog", 2);
+                                progressDialog.dismiss();
+                                startActivity(intent);
+                                //                    mBtImageShow.setVisibility(View.VISIBLE);
+                                //                     mImageUrl = URL + responseBody.getPath();
+                                //                    Snackbar.make(findViewById(R.id.content), responseBody.getMessage(),Snackbar.LENGTH_SHORT).show();
+
+                            } else {
+                                progressDialog.dismiss();
+                                Log.d("onResponse: ", response.message());
+                                Toast.makeText(AddSparepart.this, response.toString(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            progressDialog.dismiss();
+                            Log.d("onFailure: ", t.toString());
+
+                            //                mProgressBar.setVisibility(View.GONE);
+                            //                Log.d(TAG, "onFailure: "+t.getLocalizedMessage());
+                        }
+                    });
+                }
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }

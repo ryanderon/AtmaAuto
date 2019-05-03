@@ -1,79 +1,89 @@
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.AddSupplier"
-    android:background="@color/bgLogin"
-    android:theme="@style/AppTheme.NoActionBar">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="52dp"
-        android:fontFamily="@font/montserrat"
-        android:text="Pesan Barang"
-        android:textColor="@android:color/black"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:fillViewport="true"> <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
 
-    <ImageView
-        android:id="@+id/btnBack"
-        style="@style/ImageView.Hamburger"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_action_back"
-        android:tint="@color/bpDarker_blue"
-        app:layout_constraintBottom_toTopOf="@+id/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/btnEdit"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="364dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_action_edit"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-    <ScrollView
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="680dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="18dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
+        android:layout_height="match_parent"
+        android:background="@color/bgLogin"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:context=".UI.AddProcurement">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="52dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Pesan Barang"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.454"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnBack"
+            style="@style/ImageView.Hamburger"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_action_back"
+            android:tint="@color/bpDarker_blue"
+            app:layout_constraintBottom_toTopOf="@+id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/btnEdit"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="364dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_action_edit"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
         <LinearLayout
-            android:layout_width="374dp"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/procurementDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginEnd="18dp"
-                android:editable="false"
                 android:clickable="true"
-                android:focusable="false"
+                android:editable="false"
                 android:ems="10"
+                android:focusable="false"
                 android:hint="Tanggal Pesan"
                 android:inputType="none"
                 app:met_floatingLabel="highlight" />
@@ -86,8 +96,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="18dp"
                 android:ems="10"
-                android:hint="Status"
                 android:entries="@array/procurementstatus"
+                android:hint="Status"
                 app:met_floatingLabel="highlight" />
 
             <Spinner
@@ -114,16 +124,16 @@
 
             <TextView
                 android:id="@+id/subtitle1"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Input Sparepart"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/sparepart"
@@ -153,32 +163,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:layout_marginEnd="80dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="80dp"
                 android:background="@drawable/button_bluelogin"
                 android:text="Tambah"
                 android:textColor="@color/bgLogin"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/subtitle2"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Daftar Sparepart"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/procurement_list"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:paddingTop="5dp" />
 
             <Button
@@ -187,20 +196,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/button_bluelogin"
                 android:text="Input Pesanan"
                 android:textColor="@color/bgLogin"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
         </LinearLayout>
 
-    </ScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
 
 
 
 
 
-
-</android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package p3l_8980.com.atmaauto.UI;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -116,12 +117,26 @@ public class AddProcurement extends AppCompatActivity {
             });
 
         }
+        else{
+            editButton.setVisibility(View.GONE);
+        }
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(AddProcurement.this, Beranda.class);
+                intent.putExtra("addDialog", 3);
+                startActivity(intent);
+            }
+        });
+
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
+
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -373,80 +388,91 @@ public class AddProcurement extends AppCompatActivity {
     }
 
     private void save() {
-        try {
-            final ProgressDialog progressDialog = new ProgressDialog(AddProcurement.this, R.style.AppTheme_Dark_Dialog);
-            progressDialog.setMessage("Memproses Data...");
-            progressDialog.show();
-            Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://p3l.yafetrakan.com/api/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        if(procurementDate.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(), "tanggal pesan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(amount.getText().toString().isEmpty()){
+            Toast.makeText(getApplicationContext(),"Jumlah pesanan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else if(Integer.parseInt(amount.getText().toString())<=0){
+            Toast.makeText(getApplicationContext(), "Jumlah pesanan tidak boleh 0 atau kurang dari 0", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            try {
+                final ProgressDialog progressDialog = new ProgressDialog(AddProcurement.this, R.style.AppTheme_Dark_Dialog);
+                progressDialog.setMessage("Memproses Data...");
+                progressDialog.show();
+                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
 
-            ApiClient apiClient = retrofit.create(ApiClient.class);
+                ApiClient apiClient = retrofit.create(ApiClient.class);
 
-            Call<ResponseBody> addProcurement = apiClient.addProcurement(procurementDate.getText().toString(),status.getSelectedItem().toString(),idsales);
+                Call<ResponseBody> addProcurement = apiClient.addProcurement(procurementDate.getText().toString(),status.getSelectedItem().toString(),idsales);
 
-            addProcurement.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    try {
-                        JSONObject jsonRes = new JSONObject(response.body().string());
-                        String idprocurement =  jsonRes.getJSONObject("data").getString("id_procurement");
-                        Log.d("idprocurement", idprocurement);
-                        for(int x=0;x<details.size();x++)
-                        {
-                            Log.d("masuk", "masssuk");
-                            Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                    .baseUrl("https://p3l.yafetrakan.com/api/")
-                                    .addConverterFactory(GsonConverterFactory.create())
-                                    .build();
+                addProcurement.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            JSONObject jsonRes = new JSONObject(response.body().string());
+                            String idprocurement =  jsonRes.getJSONObject("data").getString("id_procurement");
+                            Log.d("idprocurement", idprocurement);
+                            for(int x=0;x<details.size();x++)
+                            {
+                                Log.d("masuk", "masssuk");
+                                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build();
 
-                            ApiClient apiClient = retrofit.create(ApiClient.class);
+                                ApiClient apiClient = retrofit.create(ApiClient.class);
 
-                            Call<ResponseBody> addProcurementDetail = apiClient.addProcurementDetail(details.get(x).getPrice(),details.get(x).getAmount(),details.get(x).getSubtotal(),details.get(x).getIdSparepart(),Integer.parseInt(idprocurement));
+                                Call<ResponseBody> addProcurementDetail = apiClient.addProcurementDetail(details.get(x).getPrice(),details.get(x).getAmount(),details.get(x).getSubtotal(),details.get(x).getIdSparepart(),Integer.parseInt(idprocurement));
 
-                            addProcurementDetail.enqueue(new Callback<ResponseBody>() {
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    Log.d("successe", "hehehe");
-                                    try {
-                                        JSONObject jsonRes = new JSONObject(response.body().string());
-                                        String iddetailprocurement =  jsonRes.getJSONObject("data").getString("id_procurement_detail");
-                                        Log.d("idprocurement", iddetailprocurement);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
+                                addProcurementDetail.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        Log.d("successe", "hehehe");
+                                        try {
+                                            JSONObject jsonRes = new JSONObject(response.body().string());
+                                            String iddetailprocurement =  jsonRes.getJSONObject("data").getString("id_procurement_detail");
+                                            Log.d("idprocurement", iddetailprocurement);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                }
-                            });
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                    }
+                                });
+                            }
+
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Berhasil Input Data", Toast.LENGTH_SHORT).show();
+                            final Intent intent = new Intent(AddProcurement.this, Beranda.class);
+                            intent.putExtra("addDialog", 3);
+                            startActivity(intent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
 
-                        progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Berhasil Input Data", Toast.LENGTH_SHORT).show();
-                        final Intent intent = new Intent(AddProcurement.this, Beranda.class);
-                        intent.putExtra("addDialog", 3);
-                        startActivity(intent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
 
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }catch (Exception e) {
-            e.printStackTrace();
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
