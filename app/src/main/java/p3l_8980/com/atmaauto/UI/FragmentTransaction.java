@@ -26,20 +26,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragmentCustomer extends Fragment {
+public class FragmentTransaction extends Fragment {
 
     View view;
-    Button addButton;
+
+    Intent i;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frgcustomer,container,false);
-        addButton = (Button) view.findViewById(R.id.btnAdd);
-
-
-        addButton.setVisibility(View.GONE);
+        view = inflater.inflate(R.layout.frgtranscation,container,false);
 
         return view;
     }
+
+
+
 }

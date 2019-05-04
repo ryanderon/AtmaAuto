@@ -391,12 +391,7 @@ public class AddProcurement extends AppCompatActivity {
         if(procurementDate.getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(), "tanggal pesan tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
-        else if(amount.getText().toString().isEmpty()){
-            Toast.makeText(getApplicationContext(),"Jumlah pesanan tidak boleh kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if(Integer.parseInt(amount.getText().toString())<=0){
-            Toast.makeText(getApplicationContext(), "Jumlah pesanan tidak boleh 0 atau kurang dari 0", Toast.LENGTH_SHORT).show();
-        }
+
         else{
             try {
                 final ProgressDialog progressDialog = new ProgressDialog(AddProcurement.this, R.style.AppTheme_Dark_Dialog);

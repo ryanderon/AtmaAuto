@@ -19,4 +19,9 @@
         android:id="@+id/navigation_procurement"
         android:icon="@drawable/ic_action_procurements"
         android:title="Pengadaan" />
+
+    <item
+        android:id="@+id/navigation_transaction"
+        android:icon="@drawable/ic_action_transaction"
+        android:title="Transaksi" />
 </menu>
