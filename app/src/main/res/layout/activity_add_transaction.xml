@@ -65,7 +65,6 @@
             android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="36dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical"
@@ -85,68 +84,91 @@
                 android:inputType="textPersonName"
                 app:met_floatingLabel="highlight" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/customerPlat"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:layout_marginEnd="18dp"
-                android:ems="10"
-                android:hint="Nomor Telepon Customer"
-                android:inputType="number"
-                app:met_floatingLabel="highlight" />
+            <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+                <!--android:id="@+id/customerPhone"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="18dp"-->
+                <!--android:layout_marginEnd="18dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="Nomor Telepon Customer"-->
+                <!--android:inputType="number"-->
+                <!--app:met_floatingLabel="highlight" />-->
 
             <Spinner
-                android:id="@+id/Status"
+                android:id="@+id/transitionStatus"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="18dp"
                 android:ems="10"
-                android:entries="@array/procurementstatus"
+                android:entries="@array/transactionstatus"
                 android:hint="Status"
                 app:met_floatingLabel="highlight" />
 
+            <Spinner
+                android:id="@+id/transactionType"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:entries="@array/transactiontype"
+                android:hint="Status"
+                app:met_floatingLabel="highlight" />
 
             <TextView
-                android:id="@+id/subtitle1"
+                android:id="@+id/subtitle3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Input Sparepart"
+                android:text="Input Service"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/sparepart"
+                android:id="@+id/service"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="18dp"
                 android:ems="10"
-                android:hint="Sparepart"
+                android:hint="Service"
                 app:met_floatingLabel="highlight" />
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/amount"
+            <Spinner
+                android:id="@+id/motorcycleUser"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="18dp"
                 android:ems="10"
-                android:hint="Jumlah Pesanan"
-                android:inputType="number"
+                android:hint="Motorcycle"
                 app:met_floatingLabel="highlight" />
 
+            <Spinner
+                android:id="@+id/mechanic"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:ems="10"
+                android:hint="Motorcycle"
+                app:met_floatingLabel="highlight" />
+
+
             <Button
-                android:id="@+id/btnInputSparepart"
+                android:id="@+id/btnInputService"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,24 +181,93 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/subtitle2"
+                android:id="@+id/subtitle4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Daftar Sparepart"
+                android:text="Detail Service"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/procurement_list"
+                android:id="@+id/detailservice_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:paddingTop="5dp" />
+
+
+            <!--<TextView-->
+                <!--android:id="@+id/subtitle1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:fontFamily="@font/montserrat"-->
+                <!--android:text="Input Sparepart"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<Spinner-->
+                <!--android:id="@+id/sparepart"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_marginStart="18dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginEnd="18dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="Sparepart"-->
+                <!--app:met_floatingLabel="highlight" />-->
+
+            <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+                <!--android:id="@+id/amount"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="18dp"-->
+                <!--android:layout_marginEnd="18dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="Jumlah Pesanan"-->
+                <!--android:inputType="number"-->
+                <!--app:met_floatingLabel="highlight" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/btnInputSparepart"-->
+                <!--style="@style/Base.Widget.AppCompat.Button.Borderless"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="80dp"-->
+                <!--android:layout_marginTop="15dp"-->
+                <!--android:layout_marginEnd="80dp"-->
+                <!--android:background="@drawable/button_bluelogin"-->
+                <!--android:text="Tambah"-->
+                <!--android:textColor="@color/bgLogin"-->
+                <!--android:textSize="16sp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/subtitle2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:fontFamily="@font/montserrat"-->
+                <!--android:text="Daftar Sparepart"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/procurement_list"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:paddingTop="5dp" />-->
 
             <Button
                 android:id="@+id/btnAdd"
@@ -187,7 +278,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="18dp"
                 android:background="@drawable/button_bluelogin"
-                android:text="Input Pesanan"
+                android:text="Input Transaksi"
                 android:textColor="@color/bgLogin"
                 android:textSize="16sp" />
         </LinearLayout>

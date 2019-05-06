@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import okhttp3.ResponseBody;
 import p3l_8980.com.atmaauto.Controller.ApiClient;
+import p3l_8980.com.atmaauto.Controller.Customer;
+import p3l_8980.com.atmaauto.Controller.CustomerList;
 import p3l_8980.com.atmaauto.Controller.Supplier;
 import p3l_8980.com.atmaauto.Controller.SupplierList;
 import p3l_8980.com.atmaauto.R;
@@ -31,33 +33,42 @@ import java.util.List;
 
 public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyViewHolder> {
 
-    private SupplierList SupplierBundle;
+    private CustomerList CustomerBundle;
     private Context context;
 
-
-//    @Override
-//    public Filter getFilter() {
-//        return supplierFilter;
-//    }
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView Nama, Plat, Nomor;
+        public TextView Nama, Address, Phone;
         public LinearLayout topWraper;
         public LinearLayout bottomWraper;
 
         public MyViewHolder(View v) {
             super(v);
             Nama = v.findViewById(R.id.frgtNamaCustomer);
-            Plat = v.findViewById(R.id.frgtPlatNumber);
-            Nomor = v.findViewById(R.id.frgtCustomerPhone);
+            Address = v.findViewById(R.id.frgtAddressCustomer);
+            Phone = v.findViewById(R.id.frgtPhoneCustomer);
             bottomWraper = v.findViewById(R.id.bottom_wrapper);
             topWraper = v.findViewById(R.id.top_wrapper);
-            topWraper.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, AddTransaction.class);
-                }
-            });
+        }
+    }
+
+    public AdapterCustomer(CustomerList CustomerBundle , Context context) {
+        this.CustomerBundle = CustomerBundle;
+        this.context = context;
+    }
+
+    public AdapterCustomer(CustomerList CustomerBundle) {
+        this.CustomerBundle = CustomerBundle;
+    }
+
+    public void setFilter(List<Customer> newList){
+        CustomerBundle = new CustomerList();
+        CustomerBundle.getData().addAll(newList);
+        notifyDataSetChanged();
+
+        int i;
+        for (i=0; i<CustomerBundle.getData().size(); i++)
+        {
+            Log.d("customerbundle",CustomerBundle.getData().get(i).getCustomerName());
         }
     }
 
@@ -66,19 +77,70 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
     public AdapterCustomer.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // create a new view
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.recyclesupplier, viewGroup, false);
+                .inflate(R.layout.recyclecustomer, viewGroup, false);
         return new MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  final AdapterCustomer.MyViewHolder vh, int i) {
+    public void onBindViewHolder(@NonNull  final AdapterCustomer.MyViewHolder vh, final int i) {
+        final Customer data = CustomerBundle.getData().get(i);
+        final int ifinal = vh.getAdapterPosition();
+        vh.Nama.setText(data.getCustomerName());
+        vh.Address.setText(data.getCustomerAddress());
+        vh.Phone.setText(data.getCustomerPhoneNumber());
+        vh.topWraper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AddCustomer.class);
+                intent.putExtra("simpan", i);
+                intent.putExtra("name", data.getCustomerName());
+                intent.putExtra("address", data.getCustomerAddress());
+                intent.putExtra("number", data.getCustomerPhoneNumber());
+                intent.putExtra("id", data.getIdCustomer());
+                context.startActivity(intent);
+            }
+        });
+        vh.bottomWraper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                ApiClient apiClient = retrofit.create(ApiClient.class);
+
+                Call<ResponseBody> deleteCustomer = apiClient.deleteCustomer(CustomerBundle.getData().get(i).getIdCustomer());
+                deleteCustomer.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.code() == 200){
+//                          notifyItemRemoved(vh.getAdapterPosition());
+//                          notifyItemRangeChanged(vh.getAdapterPosition(), SupplierBundle.getData().size());
+                            Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Customer", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data Customer", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                CustomerBundle.getData().remove(ifinal);
+                notifyItemRemoved(ifinal);
+                notifyItemRangeChanged(ifinal, getItemCount());
+            }
+        });
     }
 
 
     @Override
     public int getItemCount() {
-        return SupplierBundle.getData().size();
+        return CustomerBundle.getData().size();
     }
 
 }

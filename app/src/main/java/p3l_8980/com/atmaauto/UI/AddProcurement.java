@@ -174,7 +174,7 @@ public class AddProcurement extends AppCompatActivity {
                     public void onResponse(Call<SalesList> call, Response<SalesList> response) {
                         ArrayList<Sales> sales1 = new ArrayList<>();
                         for (int i = 0; i < response.body().getData().size(); i++) {
-                            if(response.body().getData().get(i).getIdSales()==idsupplier) {
+                            if(response.body().getData().get(i).getIdSupplier()==idsupplier) {
                                 sales1.add(new Sales(response.body().getData().get(i).getIdSales(), response.body().getData().get(i).getSalesName()));
                             }
                         }

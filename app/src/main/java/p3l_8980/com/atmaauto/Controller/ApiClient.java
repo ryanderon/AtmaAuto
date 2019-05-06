@@ -131,5 +131,45 @@ public interface ApiClient {
     @GET("sales")
     Call<SalesList> getSales();
 
+    @GET("motorcycle_brands")
+    Call<MotorcycleBrandList> getMotorcycleBrand();
 
+    @GET("motorcycle_types")
+    Call<MotorcycleTypeList> getMotorcycleType();
+
+    @GET("transactions")
+    Call<TransactionList> getTransaction();
+
+    @GET("customers")
+    Call<CustomerList> getCustomer();
+
+    @GET("services")
+    Call<ServicesList> getServices();
+
+    @GET("employees")
+    Call<EmployeeList> getEmployee();
+
+    @POST("customers")
+    @FormUrlEncoded
+    Call<CustomerData> addCustomer(@Field("customer_name") String customer_name,
+                                   @Field("customer_address") String customer_address,
+                                   @Field("customer_phone_number") String customer_phone_number);
+
+    @PUT("customers/{id}")
+    @FormUrlEncoded
+    Call<CustomerData> updateCustomer(@Path("id") int id,@Field("customer_name") String customer_name,
+                                      @Field("customer_address") String customer_address,
+                                      @Field("customer_phone_number") String customer_phone_number);
+
+    @DELETE("customers/{id}")
+    Call<ResponseBody> deleteCustomer(@Path("id") int id);
+
+    @GET("usermotorcycles/{id}")
+    Call<MotorcycleList> getMotorcycle(@Path("id") int id);
+
+    @POST("motorcycles")
+    @FormUrlEncoded
+    Call<MotorcycleData> addMotorcycle(@Field("license_number") String license_number,
+                                   @Field("id_motorcycle_type") int id_motorcycle_type,
+                                   @Field("id_customer") int id_customer);
 }

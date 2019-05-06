@@ -6,18 +6,32 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import p3l_8980.com.atmaauto.Controller.ApiClient;
+import p3l_8980.com.atmaauto.Controller.Customer;
+import p3l_8980.com.atmaauto.Controller.CustomerList;
+import p3l_8980.com.atmaauto.Controller.Procurement;
+import p3l_8980.com.atmaauto.Controller.ProcurementList;
 import p3l_8980.com.atmaauto.Controller.SupplierList;
+import p3l_8980.com.atmaauto.Controller.Transaction;
+import p3l_8980.com.atmaauto.Controller.TransactionList;
 import p3l_8980.com.atmaauto.R;
 import p3l_8980.com.atmaauto.Session.SessionManager;
 import retrofit2.Call;
@@ -28,18 +42,109 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentCustomer extends Fragment {
 
-    View view;
-    Button addButton;
+    View v;
+    private RecyclerView rview;
+    private AdapterCustomer adapter;
+    private RecyclerView.LayoutManager layout;
+    private List<CustomerList> customerLists;
+    private AdapterCustomer adapterCustomer;
+    private List<Customer> CustomerBundleFull;
+    private AdapterCustomer customerAdapter;
+    private CustomerList customerList1;
+
+    Intent i;
+
+    SessionManager session;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu,inflater);
+        inflater.inflate(R.menu.menu, menu);
+
+        MenuItem searchSupplier = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchSupplier.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                newText = newText.toLowerCase();
+                List<Customer> newList = new ArrayList<>();
+                //Sparepart newList = new Sparepart();
+
+//                for (Customer customer : CustomerBundleFull)
+//                {
+//                    String tanggal = customer.getDate().toLowerCase();
+//                    String sales = procurement.getSales().toLowerCase();
+//                    Log.d("procurementlower",procurement.getDate().toLowerCase());
+//                    if(tanggal.contains(newText) || sales.contains(newText))
+//                        newList.add(procurement);
+//                }
+//                adapter.setFilter(newList);
+
+                return false;
+            }
+        });
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.frgcustomer,container,false);
-        addButton = (Button) view.findViewById(R.id.btnAdd);
+        v = inflater.inflate(R.layout.frgcustomer,container,false);
+        rview = v.findViewById(R.id.customer_list);
+        rview.setHasFixedSize(true);
+        layout = new LinearLayoutManager(getContext());
+        rview.setLayoutManager(layout);
+
+        customerLists = new ArrayList<>();
+        customerAdapter = new AdapterCustomer(customerList1,this.getContext());
+
+        session = new SessionManager(getContext());
+        session.checkLogin();
+
+        Retrofit retrofit= new retrofit2.Retrofit.Builder()
+                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient apiClient = retrofit.create(ApiClient.class);
+
+        Call<CustomerList> customerGet = apiClient.getCustomer();
+
+        customerGet.enqueue(new Callback<CustomerList>() {
+            @Override
+            public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
+                try {
+                    adapter = new AdapterCustomer(response.body(),getContext());
+                    CustomerBundleFull =  response.body().getData();
+
+                    rview.setAdapter(adapter);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Tidak Ada Customer!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CustomerList> call, Throwable t) {
+                Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
 
-        addButton.setVisibility(View.GONE);
-
-        return view;
+        return v;
     }
 }

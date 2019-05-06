@@ -8,21 +8,19 @@ import android.widget.LinearLayout;
 
 import p3l_8980.com.atmaauto.R;
 
-public class Customer extends AppCompatActivity {
+public class MenuCustomer extends AppCompatActivity {
 
     LinearLayout oldCustomer, newCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer);
+        setContentView(R.layout.activity_menu_customer);
         init();
-
-
         newCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(Customer.this, AddCustomer.class);
+                final Intent intent = new Intent(MenuCustomer.this, AddCustomer.class);
                 intent.putExtra("addDialog", 4);
                 startActivity(intent);
             }
@@ -31,7 +29,7 @@ public class Customer extends AppCompatActivity {
         oldCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent(Customer.this, AddTransaction.class);
+                final Intent intent = new Intent(MenuCustomer.this, CustomerOld.class);
                 intent.putExtra("addDialog", 4);
                 startActivity(intent);
             }

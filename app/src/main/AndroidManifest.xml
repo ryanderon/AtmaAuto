@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.AddTransaction"></activity>
-        <activity android:name=".UI.Customer" />
+        <activity android:name=".UI.AddMotorcycle"></activity>
+        <activity android:name=".UI.MotorData" />
+        <activity android:name=".UI.CustomerOld" />
+        <activity android:name=".UI.MenuCustomer" />
+        <activity android:name=".UI.AddTransaction" />
         <activity android:name=".UI.AddCustomer" />
         <activity android:name=".UI.UpdateVerification" />
         <activity android:name=".UI.VerificationProcurement" />

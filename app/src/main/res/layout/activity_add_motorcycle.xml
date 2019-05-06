@@ -17,7 +17,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="52dp"
         android:fontFamily="@font/montserrat"
-        android:text="Tambah Customer"
+        android:text="Tambah Motor"
         android:textColor="@android:color/black"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -39,6 +39,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <Button
+        android:id="@+id/btnEdit"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="364dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_action_edit"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:layout_width="374dp"
         android:layout_height="wrap_content"
@@ -52,37 +65,36 @@
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/customerName"
+            android:id="@+id/licenseNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
             android:ems="10"
-            android:hint="Nama Customer"
+            android:hint="Plat nomor"
             android:inputType="textPersonName"
             app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/customerAddress"
-            android:layout_marginTop="5dp"
+        <Spinner
+            android:id="@+id/brandMotor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="18dp"
             android:ems="10"
-            android:hint="Alamat Customer"
+            android:hint="Supplier"
             app:met_floatingLabel="highlight" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/customerNumber"
-            android:layout_marginTop="5dp"
+        <Spinner
+            android:id="@+id/typeMotor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="18dp"
             android:ems="10"
-            android:hint="Nomor Telepon Customer"
-            android:inputType="number"
+            android:hint="Sales"
             app:met_floatingLabel="highlight" />
 
         <Button

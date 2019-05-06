@@ -233,7 +233,7 @@ public class Beranda extends AppCompatActivity {
                 break;
 
             case 4 :
-                i = new Intent(Beranda.this, Customer.class);
+                i = new Intent(Beranda.this, MenuCustomer.class);
                 i.putExtra("simpan", -1);
                 startActivity(i);
                 break;

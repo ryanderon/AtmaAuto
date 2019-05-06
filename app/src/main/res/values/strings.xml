@@ -41,4 +41,16 @@
         <item>Finish</item>
     </string-array>
 
+    <string-array name="transactionstatus">
+        <item>unprocessed</item>
+        <item>on progress</item>
+        <item>finish</item>
+    </string-array>
+
+    <string-array name="transactiontype">
+        <item>Sparepart</item>
+        <item>Service</item>
+        <item>Service And Sparepart</item>
+    </string-array>
+
 </resources>
