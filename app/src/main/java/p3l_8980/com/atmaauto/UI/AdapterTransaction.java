@@ -93,53 +93,59 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
         {
             vh.transactionStatus.setBackgroundColor(Color.parseColor("#45f62d"));
         }
-//        vh.topWraper.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, AddSupplier.class);
-//                intent.putExtra("simpan", i);
-//                intent.putExtra("name", data.getSupplierName());
-//                intent.putExtra("address", data.getSupplierAddress());
-//                intent.putExtra("number", data.getSupplierPhoneNumber());
-//                intent.putExtra("id", data.getIdSupplier());
-//                context.startActivity(intent);
-//            }
-//        });
-//        vh.bottomWraper.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Retrofit retrofit = new retrofit2.Retrofit.Builder()
-//                        .baseUrl("https://p3l.yafetrakan.com/api/")
-//                        .addConverterFactory(GsonConverterFactory.create())
-//                        .build();
-//
-//                ApiClient apiClient = retrofit.create(ApiClient.class);
-//
-//                Call<ResponseBody> deleteSupplier = apiClient.deleteSupplier(TransactionBundle.getData().get(i).getIdTransaction());
-//                deleteSupplier.enqueue(new Callback<ResponseBody>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                        if (response.code() == 200){
-////                          notifyItemRemoved(vh.getAdapterPosition());
-////                          notifyItemRangeChanged(vh.getAdapterPosition(), SupplierBundle.getData().size());
-//                            Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Supplier", Toast.LENGTH_SHORT).show();
-//                        }else{
-//                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                        Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                SupplierBundle.getData().remove(ifinal);
-//                notifyItemRemoved(ifinal);
-//                notifyItemRangeChanged(ifinal, getItemCount());
-//            }
-//        });
+        vh.topWraper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AddTransaction.class);
+                intent.putExtra("simpan", i);
+                intent.putExtra("name", data.getCustomerName());
+                intent.putExtra("status", data.getTransactionStatus());
+                intent.putExtra("type", data.getTransactionType());
+                intent.putExtra("id_transaction", data.getIdTransaction());
+                intent.putExtra("id", data.getIdCustomer());
+                context.startActivity(intent);
+            }
+        });
+        vh.bottomWraper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(data.getTransactionStatus().equalsIgnoreCase("Unprocessed")) {
+                    Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                            .baseUrl("https://p3l.yafetrakan.com/api/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    ApiClient apiClient = retrofit.create(ApiClient.class);
+
+                    Call<ResponseBody> deleteTransaction = apiClient.deleteTransaction(TransactionBundle.getData().get(i).getIdTransaction());
+                    deleteTransaction.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.code() == 200) {
+//                          notifyItemRemoved(vh.getAdapterPosition());
+//                          notifyItemRangeChanged(vh.getAdapterPosition(), SupplierBundle.getData().size());
+                                Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Supplier", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    TransactionBundle.getData().remove(ifinal);
+                    notifyItemRemoved(ifinal);
+                    notifyItemRangeChanged(ifinal, getItemCount());
+                }
+                else
+                {
+                    Toast.makeText(context.getApplicationContext(), "Tidak dapat membatalkan transaksi", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override

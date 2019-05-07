@@ -12,10 +12,10 @@ public class Service {
     private int detailServiceAmount;
     @SerializedName("detail_service_price")
     @Expose
-    private int detailServicePrice;
+    private double detailServicePrice;
     @SerializedName("detail_service_subtotal")
     @Expose
-    private int detailServiceSubtotal;
+    private double detailServiceSubtotal;
     @SerializedName("id_transaction")
     @Expose
     private String idTransaction;
@@ -34,6 +34,17 @@ public class Service {
     @SerializedName("license_number")
     @Expose
     private String licenseNumber;
+    @SerializedName("id_motorcycle")
+    @Expose
+    private int idMotorcycle;
+
+    public int getIdMotorcycle() {
+        return idMotorcycle;
+    }
+
+    public void setIdMotorcycle(int idMotorcycle) {
+        this.idMotorcycle = idMotorcycle;
+    }
 
     /**
      * No args constructor for use in serialization
@@ -55,7 +66,7 @@ public class Service {
      * @param idTransaction
      * @param serviceName
      */
-    public Service(int idDetailService, int detailServiceAmount, int detailServicePrice, int detailServiceSubtotal, String idTransaction, int idService, String serviceName, int idMechanic, String mechanicName, String licenseNumber) {
+    public Service(int idDetailService, int detailServiceAmount, double detailServicePrice, double detailServiceSubtotal, String idTransaction, int idService, String serviceName, int idMechanic, String mechanicName, String licenseNumber) {
         super();
         this.idDetailService = idDetailService;
         this.detailServiceAmount = detailServiceAmount;
@@ -66,6 +77,18 @@ public class Service {
         this.serviceName = serviceName;
         this.idMechanic = idMechanic;
         this.mechanicName = mechanicName;
+        this.licenseNumber = licenseNumber;
+    }
+
+    public Service(int detailServiceAmount, double detailServicePrice, double detailServiceSubtotal, int idService, String serviceName, int idMechanic, int idMotorcycle,String licenseNumber) {
+        super();
+        this.detailServiceAmount = detailServiceAmount;
+        this.detailServicePrice = detailServicePrice;
+        this.detailServiceSubtotal = detailServiceSubtotal;
+        this.idService = idService;
+        this.serviceName = serviceName;
+        this.idMotorcycle = idMotorcycle;
+        this.idMechanic = idMechanic;
         this.licenseNumber = licenseNumber;
     }
 
@@ -85,19 +108,19 @@ public class Service {
         this.detailServiceAmount = detailServiceAmount;
     }
 
-    public int getDetailServicePrice() {
+    public double getDetailServicePrice() {
         return detailServicePrice;
     }
 
-    public void setDetailServicePrice(int detailServicePrice) {
+    public void setDetailServicePrice(double detailServicePrice) {
         this.detailServicePrice = detailServicePrice;
     }
 
-    public int getDetailServiceSubtotal() {
+    public double getDetailServiceSubtotal() {
         return detailServiceSubtotal;
     }
 
-    public void setDetailServiceSubtotal(int detailServiceSubtotal) {
+    public void setDetailServiceSubtotal(double detailServiceSubtotal) {
         this.detailServiceSubtotal = detailServiceSubtotal;
     }
 

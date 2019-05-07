@@ -12,10 +12,10 @@ public class SparepartTransaction {
     private int detailSparepartAmount;
     @SerializedName("detail_sparepart_price")
     @Expose
-    private int detailSparepartPrice;
+    private double detailSparepartPrice;
     @SerializedName("detail_sparepart_subtotal")
     @Expose
-    private int detailSparepartSubtotal;
+    private double detailSparepartSubtotal;
     @SerializedName("id_transaction")
     @Expose
     private String idTransaction;
@@ -40,6 +40,9 @@ public class SparepartTransaction {
     @SerializedName("license_number")
     @Expose
     private String licenseNumber;
+    @SerializedName("id_motorcycle")
+    @Expose
+    private int idMotorcycle;
 
     /**
      * No args constructor for use in serialization
@@ -63,7 +66,7 @@ public class SparepartTransaction {
      * @param idTransaction
      * @param detailSparepartSubtotal
      */
-    public SparepartTransaction(int idDetailSparepart, int detailSparepartAmount, int detailSparepartPrice, int detailSparepartSubtotal, String idTransaction, String idSparepart, String sparepartType, String sparepartName, String merk, int idMechanic, String mechanicName, String licenseNumber) {
+    public SparepartTransaction(int idDetailSparepart, int detailSparepartAmount, double detailSparepartPrice, double detailSparepartSubtotal, String idTransaction, String idSparepart, String sparepartType, String sparepartName, String merk, int idMechanic, String mechanicName, String licenseNumber) {
         super();
         this.idDetailSparepart = idDetailSparepart;
         this.detailSparepartAmount = detailSparepartAmount;
@@ -77,6 +80,29 @@ public class SparepartTransaction {
         this.idMechanic = idMechanic;
         this.mechanicName = mechanicName;
         this.licenseNumber = licenseNumber;
+    }
+
+    public SparepartTransaction(int detailSparepartAmount, double detailSparepartPrice, double detailSparepartSubtotal,String idSparepart, String sparepartType, String sparepartName, String merk, int idMechanic, int idMotorcycle) {
+        super();
+        this.detailSparepartAmount = detailSparepartAmount;
+        this.detailSparepartPrice = detailSparepartPrice;
+        this.detailSparepartSubtotal = detailSparepartSubtotal;
+        this.idSparepart = idSparepart;
+        this.sparepartType = sparepartType;
+        this.sparepartName = sparepartName;
+        this.merk = merk;
+        this.idMechanic = idMechanic;
+//        this.mechanicName = mechanicName;
+//        this.licenseNumber = licenseNumber;
+        this.idMotorcycle = idMotorcycle;
+    }
+
+    public int getIdMotorcycle() {
+        return idMotorcycle;
+    }
+
+    public void setIdMotorcycle(int idMotorcycle) {
+        this.idMotorcycle = idMotorcycle;
     }
 
     public int getIdDetailSparepart() {
@@ -95,19 +121,19 @@ public class SparepartTransaction {
         this.detailSparepartAmount = detailSparepartAmount;
     }
 
-    public int getDetailSparepartPrice() {
+    public double getDetailSparepartPrice() {
         return detailSparepartPrice;
     }
 
-    public void setDetailSparepartPrice(int detailSparepartPrice) {
+    public void setDetailSparepartPrice(double detailSparepartPrice) {
         this.detailSparepartPrice = detailSparepartPrice;
     }
 
-    public int getDetailSparepartSubtotal() {
+    public double getDetailSparepartSubtotal() {
         return detailSparepartSubtotal;
     }
 
-    public void setDetailSparepartSubtotal(int detailSparepartSubtotal) {
+    public void setDetailSparepartSubtotal(double detailSparepartSubtotal) {
         this.detailSparepartSubtotal = detailSparepartSubtotal;
     }
 
