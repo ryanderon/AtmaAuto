@@ -25,7 +25,7 @@ public class Service {
     @SerializedName("service_name")
     @Expose
     private String serviceName;
-    @SerializedName("id_mechanic")
+    @SerializedName("id_employee")
     @Expose
     private int idMechanic;
     @SerializedName("mechanic_name")

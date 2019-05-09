@@ -31,7 +31,7 @@ public class SparepartTransaction {
     @SerializedName("merk")
     @Expose
     private String merk;
-    @SerializedName("id_mechanic")
+    @SerializedName("id_employee")
     @Expose
     private int idMechanic;
     @SerializedName("mechanic_name")
