@@ -19,8 +19,6 @@ import okhttp3.ResponseBody;
 import p3l_8980.com.atmaauto.Controller.ApiClient;
 import p3l_8980.com.atmaauto.Controller.Procurement;
 import p3l_8980.com.atmaauto.Controller.ProcurementList;
-import p3l_8980.com.atmaauto.Controller.Supplier;
-import p3l_8980.com.atmaauto.Controller.SupplierList;
 import p3l_8980.com.atmaauto.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +56,7 @@ public class AdapterProcurement extends RecyclerView.Adapter<AdapterProcurement.
         notifyDataSetChanged();
 
         int i;
-        for (i=0; i<ProcurementBundle.getData().size(); i++)
+        for (i=0; i < ProcurementBundle.getData().size(); i++)
         {
             Log.d("procurementbundle",ProcurementBundle.getData().get(i).getDate());
         }

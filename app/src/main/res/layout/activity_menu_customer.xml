@@ -57,16 +57,16 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:background="@color/bpBlue"
+            android:background="@color/mendekatiPutih"
 
             android:orientation="vertical"
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="318dp"
+                android:layout_height="174dp"
                 android:layout_gravity="center"
-                android:src="@drawable/customer"/>
+                android:src="@drawable/customer" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,23 +84,23 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_gravity="center"
-            android:background="@color/bpRed"
+            android:background="@color/mendekatiPutih"
             android:layout_marginTop="40dp"
             android:orientation="vertical"
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="332dp"
+                android:layout_height="170dp"
                 android:layout_gravity="center"
-                android:src="@drawable/customer"/>
+                android:src="@drawable/customer2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="PELANGGAN LAMA"
-                android:textColor="@color/yellowwarning"
+                android:textColor="@color/bpDark_gray"
                 android:textSize="30dp"
                 android:textStyle="bold" />
 

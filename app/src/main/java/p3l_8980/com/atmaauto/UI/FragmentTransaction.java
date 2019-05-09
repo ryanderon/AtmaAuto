@@ -87,8 +87,9 @@ public class FragmentTransaction extends Fragment {
                 {
                     String idTransaction = transaction.getIdTransaction().toLowerCase();
                     String customer = transaction.getCustomerName().toLowerCase();
-//                    Log.d("transactionlower",procurement.getDate().toLowerCase());
-                    if(idTransaction.contains(newText) || customer.contains(newText))
+                    String status = transaction.getTransactionStatus().toLowerCase();
+                    Log.d("transactionlower",transaction.getIdTransaction().toLowerCase());
+                    if(idTransaction.contains(newText) || customer.contains(newText) || status.contains(newText))
                         newList.add(transaction);
                 }
                 adapter.setFilter(newList);

@@ -3,12 +3,13 @@ package p3l_8980.com.atmaauto.Controller;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerList {
     @SerializedName("data")
     @Expose
-    private List<Customer> data = null;
+    private List<Customer> data = new ArrayList<>();
 
     /**
      * No args constructor for use in serialization

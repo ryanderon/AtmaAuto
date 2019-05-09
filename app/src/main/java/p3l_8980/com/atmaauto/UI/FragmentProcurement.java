@@ -59,8 +59,8 @@ public class FragmentProcurement extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.menu, menu);
 
-        MenuItem searchSupplier = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchSupplier.getActionView();
+        MenuItem searchProcurement = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchProcurement.getActionView();
 
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
@@ -80,8 +80,9 @@ public class FragmentProcurement extends Fragment {
                 {
                     String tanggal = procurement.getDate().toLowerCase();
                     String sales = procurement.getSales().toLowerCase();
+                    String status = procurement.getProcurementStatus().toLowerCase();
                     Log.d("procurementlower",procurement.getDate().toLowerCase());
-                    if(tanggal.contains(newText) || sales.contains(newText))
+                    if(tanggal.contains(newText) || sales.contains(newText) || status.contains(newText))
                         newList.add(procurement);
                 }
                 adapter.setFilter(newList);

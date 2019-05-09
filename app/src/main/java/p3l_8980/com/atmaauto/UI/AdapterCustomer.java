@@ -56,10 +56,6 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
         this.context = context;
     }
 
-    public AdapterCustomer(CustomerList CustomerBundle) {
-        this.CustomerBundle = CustomerBundle;
-    }
-
     public void setFilter(List<Customer> newList){
         CustomerBundle = new CustomerList();
         CustomerBundle.getData().addAll(newList);

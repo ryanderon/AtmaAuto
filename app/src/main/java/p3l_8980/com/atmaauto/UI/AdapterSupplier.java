@@ -67,7 +67,7 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.MyView
         int i;
         for (i=0; i<SupplierBundle.getData().size(); i++)
         {
-        Log.d("supplierbundle",SupplierBundle.getData().get(i).getSupplierName());
+            Log.d("supplierbundle",SupplierBundle.getData().get(i).getSupplierName());
         }
     }
 

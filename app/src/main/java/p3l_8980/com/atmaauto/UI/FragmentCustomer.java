@@ -85,15 +85,16 @@ public class FragmentCustomer extends Fragment {
                 List<Customer> newList = new ArrayList<>();
                 //Sparepart newList = new Sparepart();
 
-//                for (Customer customer : CustomerBundleFull)
-//                {
-//                    String tanggal = customer.getDate().toLowerCase();
-//                    String sales = procurement.getSales().toLowerCase();
-//                    Log.d("procurementlower",procurement.getDate().toLowerCase());
-//                    if(tanggal.contains(newText) || sales.contains(newText))
-//                        newList.add(procurement);
-//                }
-//                adapter.setFilter(newList);
+                for (Customer customer : CustomerBundleFull)
+                {
+                    String tanggal = customer.getCustomerName().toLowerCase();
+                    String address = customer.getCustomerAddress().toLowerCase();
+                    String phone = customer.getCustomerPhoneNumber().toLowerCase();
+                    Log.d("procurementlower",customer.getCustomerName().toLowerCase());
+                    if(tanggal.contains(newText) || address.contains(newText) || phone.contains(newText))
+                        newList.add(customer);
+                }
+                adapter.setFilter(newList);
 
                 return false;
             }
