@@ -1,15 +1,20 @@
 package p3l_8980.com.atmaauto.UI;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import p3l_8980.com.atmaauto.Controller.ApiClient;
 import p3l_8980.com.atmaauto.Controller.Customer;
@@ -31,7 +36,9 @@ public class CustomerOld extends AppCompatActivity {
 
     RecyclerView rview;
     private AdapterCustomer adapter;
+    private SearchView search;
     private RecyclerView.LayoutManager layout;
+    private ImageView backButton;
     private List<Customer> CustomerBundleFull;
     private List<ProcurementDetail> details = new ArrayList<>();
 
@@ -40,6 +47,22 @@ public class CustomerOld extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_old);
         init();
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                Log.d("onQueryTextSubmit: ",query);
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d("onQueryTextChange: ","true");
+                String text = newText.toLowerCase(Locale.getDefault());
+                adapter.getFilter().filter(text);
+                return true;
+            }
+        });
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
                 .baseUrl("https://p3l.yafetrakan.com/api/")
@@ -54,7 +77,7 @@ public class CustomerOld extends AppCompatActivity {
             @Override
             public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
                 try {
-                    adapter = new AdapterCustomer(response.body(),CustomerOld.this);
+                    adapter = new AdapterCustomer(response.body().getData(),CustomerOld.this);
                     CustomerBundleFull =  response.body().getData();
 
                     rview.setAdapter(adapter);
@@ -76,5 +99,16 @@ public class CustomerOld extends AppCompatActivity {
         rview.setHasFixedSize(true);
         layout = new LinearLayoutManager(getApplicationContext());
         rview.setLayoutManager(layout);
+        search = findViewById(R.id.searchCustomer);
+        backButton = findViewById(R.id.btnBack);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerOld.this, MenuCustomer.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

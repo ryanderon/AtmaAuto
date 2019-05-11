@@ -68,37 +68,37 @@ public class FragmentCustomer extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.menu, menu);
 
-        MenuItem searchSupplier = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchSupplier.getActionView();
-
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                newText = newText.toLowerCase();
-                List<Customer> newList = new ArrayList<>();
-                //Sparepart newList = new Sparepart();
-
-                for (Customer customer : CustomerBundleFull)
-                {
-                    String tanggal = customer.getCustomerName().toLowerCase();
-                    String address = customer.getCustomerAddress().toLowerCase();
-                    String phone = customer.getCustomerPhoneNumber().toLowerCase();
-                    Log.d("procurementlower",customer.getCustomerName().toLowerCase());
-                    if(tanggal.contains(newText) || address.contains(newText) || phone.contains(newText))
-                        newList.add(customer);
-                }
-                adapter.setFilter(newList);
-
-                return false;
-            }
-        });
+//        MenuItem searchSupplier = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) searchSupplier.getActionView();
+//
+//        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                newText = newText.toLowerCase();
+//                List<Customer> newList = new ArrayList<>();
+//                //Sparepart newList = new Sparepart();
+//
+//                for (Customer customer : CustomerBundleFull)
+//                {
+//                    String tanggal = customer.getCustomerName().toLowerCase();
+//                    String address = customer.getCustomerAddress().toLowerCase();
+//                    String phone = customer.getCustomerPhoneNumber().toLowerCase();
+//                    Log.d("procurementlower",customer.getCustomerName().toLowerCase());
+//                    if(tanggal.contains(newText) || address.contains(newText) || phone.contains(newText))
+//                        newList.add(customer);
+//                }
+//                adapter.setFilter(newList);
+//
+//                return false;
+//            }
+//        });
     }
 
     @Nullable
@@ -111,7 +111,7 @@ public class FragmentCustomer extends Fragment {
         rview.setLayoutManager(layout);
 
         customerLists = new ArrayList<>();
-        customerAdapter = new AdapterCustomer(customerList1,this.getContext());
+        customerAdapter = new AdapterCustomer(customerList1.getData(),this.getContext());
 
         session = new SessionManager(getContext());
         session.checkLogin();
@@ -129,7 +129,7 @@ public class FragmentCustomer extends Fragment {
             @Override
             public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
                 try {
-                    adapter = new AdapterCustomer(response.body(),getContext());
+                    adapter = new AdapterCustomer(response.body().getData(),getContext());
                     CustomerBundleFull =  response.body().getData();
 
                     rview.setAdapter(adapter);

@@ -107,13 +107,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Masuk sebagai customer? "
-            app:layout_constraintEnd_toStartOf="@+id/tvLoginRegister"
+            app:layout_constraintEnd_toStartOf="@+id/logPengguna"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnRegisterLogin" />
 
         <TextView
-            android:id="@+id/tvLoginRegister"
+            android:id="@+id/logPengguna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

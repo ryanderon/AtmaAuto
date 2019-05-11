@@ -30,10 +30,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyViewHolder> {
 
-    private CustomerList CustomerBundle;
+    private  List<Customer> CustomerBundle;
+    private List<Customer> CustomerFilter;
+
     private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -51,22 +54,12 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
         }
     }
 
-    public AdapterCustomer(CustomerList CustomerBundle , Context context) {
+    public AdapterCustomer(List<Customer> CustomerBundle , Context context) {
         this.CustomerBundle = CustomerBundle;
         this.context = context;
+        this.CustomerFilter = CustomerBundle;
     }
 
-    public void setFilter(List<Customer> newList){
-        CustomerBundle = new CustomerList();
-        CustomerBundle.getData().addAll(newList);
-        notifyDataSetChanged();
-
-        int i;
-        for (i=0; i<CustomerBundle.getData().size(); i++)
-        {
-            Log.d("customerbundle",CustomerBundle.getData().get(i).getCustomerName());
-        }
-    }
 
     @NonNull
     @Override
@@ -77,9 +70,66 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
         return new MyViewHolder(v);
     }
 
+
+
+    public void filter(String charText) {
+        Log.d( "filter: ", charText);
+
+        charText = charText.toLowerCase(Locale.getDefault());
+        CustomerFilter.clear();
+        if (charText.length() == 0) {
+            CustomerFilter.addAll(CustomerBundle);
+        }
+        else
+        {
+            for (Customer obj : CustomerBundle) {
+                if (obj.getCustomerName().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    CustomerFilter.add(obj);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    CustomerFilter = CustomerBundle;
+                } else {
+                    List<Customer> filteredList = new ArrayList<>();
+                    for (Customer obj : CustomerBundle) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (obj.getCustomerName().toLowerCase().contains(charString.toLowerCase())
+                                || obj.getCustomerAddress().toLowerCase().contains(charString.toLowerCase())
+                                || obj.getCustomerPhoneNumber().toLowerCase().contains(charString.toLowerCase())){
+                            filteredList.add(obj);
+                        }
+                    }
+                    CustomerFilter = filteredList;
+
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = CustomerFilter;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                CustomerFilter = (ArrayList<Customer>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
+
     @Override
     public void onBindViewHolder(@NonNull  final AdapterCustomer.MyViewHolder vh, final int i) {
-        final Customer data = CustomerBundle.getData().get(i);
+        final Customer data = CustomerFilter.get(i);
         final int ifinal = vh.getAdapterPosition();
         vh.Nama.setText(data.getCustomerName());
         vh.Address.setText(data.getCustomerAddress());
@@ -107,7 +157,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
 
                 ApiClient apiClient = retrofit.create(ApiClient.class);
 
-                Call<ResponseBody> deleteCustomer = apiClient.deleteCustomer(CustomerBundle.getData().get(i).getIdCustomer());
+                Call<ResponseBody> deleteCustomer = apiClient.deleteCustomer(CustomerBundle.get(i).getIdCustomer());
                 deleteCustomer.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -126,7 +176,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
                     }
                 });
 
-                CustomerBundle.getData().remove(ifinal);
+                CustomerBundle.remove(ifinal);
                 notifyItemRemoved(ifinal);
                 notifyItemRangeChanged(ifinal, getItemCount());
             }
@@ -136,7 +186,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.MyView
 
     @Override
     public int getItemCount() {
-        return CustomerBundle.getData().size();
+        return CustomerFilter.size();
     }
 
 }

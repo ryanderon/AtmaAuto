@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button button;
     private Button signInBtn;
-    private TextView tError;
+    private TextView tError, logPengguna;
     private EditText txtUsername, txtPassword;
 
 
@@ -82,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
                 login();
             }
         });
+
+        logPengguna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HomePengguna.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void init(){
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         txtUsername = (EditText)findViewById(R.id.eUsernameRegister);
         txtPassword = (EditText)findViewById(R.id.ePasswordRegister);
         tError = findViewById(R.id.tvErrorLogin);
+        logPengguna = findViewById(R.id.logPengguna);
         tError.setText("");
     }
     
