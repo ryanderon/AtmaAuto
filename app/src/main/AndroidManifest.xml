@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.HomePengguna"></activity>
+        <activity android:name=".UI.HomeSparepart"></activity>
+        <activity android:name=".UI.HomePengguna" />
         <activity android:name=".UI.AddMotorcycle" />
         <activity android:name=".UI.MotorData" />
         <activity android:name=".UI.CustomerOld" />

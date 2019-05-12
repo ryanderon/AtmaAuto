@@ -3,6 +3,8 @@ package p3l_8980.com.atmaauto.Controller;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Comparator;
+
 public class Sparepart {
 
     @SerializedName("id_sparepart")
@@ -64,7 +66,8 @@ public class Sparepart {
      * No args constructor for use in serialization
      *
      */
-    public Sparepart() {
+    public Sparepart(){
+
     }
 
     public Sparepart(String idSparepart,String nama) {
