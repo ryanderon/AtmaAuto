@@ -116,29 +116,29 @@ public class AdapterSparepart2 extends RecyclerView.Adapter<AdapterSparepart2.My
         myViewHolder.sell_price.setText("Harga : " + data.getSellPrice());
         Picasso.get().load("https://p3l.yafetrakan.com/images/"+data.getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
 
-
-        myViewHolder.topcard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AddSparepart.class);
-                intent.putExtra("simpan", i);
-                intent.putExtra("id", data.getIdSparepart());
-                intent.putExtra("name", data.getSparepartName());
-                intent.putExtra("merk", data.getMerk());
-                intent.putExtra("stock", data.getStock());
-                intent.putExtra("minstock", data.getMinStock());
-                intent.putExtra("purchaseprice", data.getPurchasePrice());
-                intent.putExtra("sellprice", data.getSellPrice());
-                intent.putExtra("placement", data.getPlacement());
-                intent.putExtra("position", data.getPosition());
-                intent.putExtra("place", data.getPlace()) ;
-                intent.putExtra("number", data.getNumber());
-                intent.putExtra("type", data.getSparepartTypeName());
-                intent.putExtra("idtype", data.getIdSparepartType());
-                intent.putExtra("image", data.getImage());
-                context.startActivity(intent);
-            }
-        });
+//
+//        myViewHolder.topcard.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, AddSparepart.class);
+//                intent.putExtra("simpan", i);
+//                intent.putExtra("id", data.getIdSparepart());
+//                intent.putExtra("name", data.getSparepartName());
+//                intent.putExtra("merk", data.getMerk());
+//                intent.putExtra("stock", data.getStock());
+//                intent.putExtra("minstock", data.getMinStock());
+//                intent.putExtra("purchaseprice", data.getPurchasePrice());
+//                intent.putExtra("sellprice", data.getSellPrice());
+//                intent.putExtra("placement", data.getPlacement());
+//                intent.putExtra("position", data.getPosition());
+//                intent.putExtra("place", data.getPlace()) ;
+//                intent.putExtra("number", data.getNumber());
+//                intent.putExtra("type", data.getSparepartTypeName());
+//                intent.putExtra("idtype", data.getIdSparepartType());
+//                intent.putExtra("image", data.getImage());
+//                context.startActivity(intent);
+//            }
+//        });
 
 //        myViewHolder.sparepart_name.setText(data.getSparepartName());
 //        myViewHolder.stock.setText(data.getStock());

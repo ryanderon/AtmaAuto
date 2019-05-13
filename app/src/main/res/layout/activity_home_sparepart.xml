@@ -46,14 +46,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnSort"
+        <Spinner
+            android:id="@+id/sortSpinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginLeft="198dp"
             android:text="Sort"
-            android:layout_marginLeft="265dp"
+            android:entries="@array/sort"
             app:layout_constraintLeft_toRightOf="@id/btnBack"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="0dp" />
 
 
         <LinearLayout

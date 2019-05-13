@@ -13,8 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,15 +50,14 @@ public class HomeSparepart extends AppCompatActivity {
     RecyclerView rview;
     private AdapterSparepart2 adapter;
     private SearchView search;
-    private Button sortButton;
+    private Spinner sortSpinner;
     private RecyclerView.LayoutManager layout;
     private List<Sparepart> SparepartBundleFull;
     private ImageView backButton;
     private List<SparepartList> sparepartList;
     private AdapterSparepart2 sparepartAdapter;
     private SparepartList sparepartList1;
-
-
+    private int simpan = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class HomeSparepart extends AppCompatActivity {
         setContentView(R.layout.activity_home_sparepart);
 
         init();
+        simpan = getIntent().getIntExtra("simpan",-1);
 
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -80,6 +84,60 @@ public class HomeSparepart extends AppCompatActivity {
             }
         });
 
+
+        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        if(simpan > -1 ){
+                        Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                            @Override
+                            public int compare(Sparepart o1, Sparepart o2) {
+                                return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
+                            }
+
+                        });adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                    case 1:
+                        if(simpan > -1){
+                        Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                            @Override
+                            public int compare(Sparepart o1, Sparepart o2) {
+//                        return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
+                                return Integer.compare(o1.getStock(), o2.getStock());
+                            }
+                        });adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                    case 2:
+                        if(simpan > -1) {
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    return Double.compare(o1.getSellPrice(), o2.getSellPrice());
+
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
+
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
                 .baseUrl("https://p3l.yafetrakan.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -95,7 +153,15 @@ public class HomeSparepart extends AppCompatActivity {
                 try {
                     adapter = new AdapterSparepart2(response.body().getData(),HomeSparepart.this);
                     SparepartBundleFull = response.body().getData();
-
+                    simpan = 1;
+                    Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                        @Override
+                        public int compare(Sparepart o1, Sparepart o2) {
+                            return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
+//                        return Integer.compare(o1.getStock(), o2.getStock());
+//                            return Double.compare(o1.getSellPrice(), o2.getSellPrice());
+                        }
+                    });
                     adapter.notifyDataSetChanged();
 //                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 //                    rview.setLayoutManager(mLayoutManager);
@@ -123,7 +189,9 @@ public class HomeSparepart extends AppCompatActivity {
         rview.setAdapter(adapter);
         backButton = findViewById(R.id.btnBack);
         search = findViewById(R.id.searchSparepart);
-        sortButton = findViewById(R.id.btnSort);
+        sortSpinner = findViewById(R.id.sortSpinner);
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,20 +200,8 @@ public class HomeSparepart extends AppCompatActivity {
             }
         });
 
-        sortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
-                    @Override
-                    public int compare(Sparepart o1, Sparepart o2) {
-//                        return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
-//                        return Integer.compare(o1.getStock(), o2.getStock());
-                        return Double.compare(o1.getSellPrice(), o2.getSellPrice());
-                    }
-                });
-                adapter.notifyDataSetChanged();
-            }
-        });
+
+
         sparepartList = new ArrayList<>();
 //        sparepartAdapter = new AdapterSparepart2(response.body().getData(),HomeSparepart.this);
 

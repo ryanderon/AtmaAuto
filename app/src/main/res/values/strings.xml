@@ -53,4 +53,10 @@
         <item>Service And Sparepart</item>
     </string-array>
 
+    <string-array name="sort">
+        <item>Sort By Name</item>
+        <item>Sort By Stock</item>
+        <item>Sort By Price</item>
+    </string-array>
+
 </resources>
