@@ -33,6 +33,14 @@ public class HomePengguna extends AppCompatActivity {
             }
         });
 
+        motorHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePengguna.this, CheckStatus.class);
+                startActivity(intent);
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

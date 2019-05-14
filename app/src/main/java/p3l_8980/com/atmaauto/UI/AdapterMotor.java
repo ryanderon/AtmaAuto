@@ -71,18 +71,19 @@ public class AdapterMotor extends RecyclerView.Adapter<AdapterMotor.MyViewHolder
         vh.licenseNumber.setText(data.getLicenseNumber());
         vh.Brand.setText(data.getMotorcycleBrand());
         vh.Type.setText(data.getMotorcycleType());
-//        vh.topWraper.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, AddCustomer.class);
-//                intent.putExtra("simpan", i);
-//                intent.putExtra("name", data.getCustomerName());
-//                intent.putExtra("address", data.getCustomerAddress());
-//                intent.putExtra("number", data.getCustomerPhoneNumber());
-//                intent.putExtra("id", data.getIdCustomer());
-//                context.startActivity(intent);
-//            }
-//        });
+        vh.topWraper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AddMotorcycle.class);
+                intent.putExtra("simpan", i);
+                intent.putExtra("license_number", data.getLicenseNumber());
+                intent.putExtra("brand", data.getMotorcycleBrand());
+                intent.putExtra("type", data.getMotorcycleType());
+                intent.putExtra("idMotor", data.getIdMotorcycle());
+                intent.putExtra("id", data.getIdCustomer());
+                context.startActivity(intent);
+            }
+        });
     }
 
 

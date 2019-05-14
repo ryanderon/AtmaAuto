@@ -49,9 +49,15 @@ public class AddMotorcycle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_motorcycle);
-        init();
 
         simpan = getIntent().getIntExtra("simpan",-1);
+
+        init();
+
+        if(simpan > -1){
+
+            licenseNumber.setText(getIntent().getStringExtra("license_number"));
+        }
 
         brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -81,10 +87,9 @@ public class AddMotorcycle extends AppCompatActivity {
                                 , types);
 
                         type.setAdapter(adapter);
-//                Log.d("items",sparepart.getItemAtPosition(0).toString());
-//                if(simpan > -1) {
-//                    spinnerType.setSelection(getIndex(spinnerType, getIntent().getStringExtra("type")));
-//                }
+                    if(simpan > -1) {
+                            type.setSelection(getIndex(type, getIntent().getStringExtra("type")));
+                        }
 
                     }
 
@@ -118,12 +123,12 @@ public class AddMotorcycle extends AppCompatActivity {
         });
 
         if(simpan > -1){
-//            addButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    update();
-//                }
-//            });
+            addBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    update();
+                }
+            });
         }else{
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -176,6 +181,59 @@ public class AddMotorcycle extends AppCompatActivity {
         }
     }
 
+    public void update(){
+        if(licenseNumber.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "plat nomor tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            try {
+                final ProgressDialog progressDialog = new ProgressDialog(AddMotorcycle.this, R.style.AppTheme_Dark_Dialog);
+                progressDialog.setMessage("Memproses Data...");
+                progressDialog.show();
+                Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                ApiClient apiClient = retrofit.create(ApiClient.class);
+
+                Call<MotorcycleData> updateMotorcycle = apiClient.updateMotorcycle(getIntent().getIntExtra("idMotor",0),licenseNumber.getText().toString(), idType, getIntent().getIntExtra("id",0));
+
+                updateMotorcycle.enqueue(new Callback<MotorcycleData>() {
+                    @Override
+                    public void onResponse(Call<MotorcycleData> call, Response<MotorcycleData> response) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Berhasil Edit Data", Toast.LENGTH_SHORT).show();
+                        final Intent intent = new Intent(AddMotorcycle.this, MotorData.class);
+                        intent.putExtra("id",getIntent().getIntExtra("id",0));
+                        intent.putExtra("name",getIntent().getStringExtra("name"));
+//                        intent.putExtra("addDialog", 4);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MotorcycleData> call, Throwable t) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Gagal Input Data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
     private void init(){
         licenseNumber = findViewById(R.id.licenseNumber);
         brand = findViewById(R.id.brandMotor);
@@ -202,10 +260,10 @@ public class AddMotorcycle extends AppCompatActivity {
                         , brands);
 
                 brand.setAdapter(adapter);
-//                Log.d("items",supplier.getItemAtPosition(0).toString());
-//                if(simpan > -1) {
-//                    supplier.setSelection(getIndex(supplier, getIntent().getStringExtra("supplier")));
-//                }
+
+                if(simpan > -1) {
+                    brand.setSelection(getIndex(brand, getIntent().getStringExtra("brand")));
+                }
 
             }
 

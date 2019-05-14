@@ -53,7 +53,7 @@ public class MotorData extends AppCompatActivity {
             @Override
             public void onResponse(Call<MotorcycleList> call, Response<MotorcycleList> response) {
                 try {
-                    adapter = new AdapterMotor(response.body(),getApplicationContext());
+                    adapter = new AdapterMotor(response.body(),MotorData.this);
                     MotorBundleFull =  response.body().getData();
 
                     rview.setAdapter(adapter);

@@ -172,6 +172,11 @@ public interface ApiClient {
     Call<MotorcycleData> addMotorcycle(@Field("license_number") String license_number,
                                    @Field("id_motorcycle_type") int id_motorcycle_type,
                                    @Field("id_customer") int id_customer);
+    @PUT("motorcycles/{id}")
+    @FormUrlEncoded
+    Call<MotorcycleData> updateMotorcycle(@Path("id") int id,@Field("license_number") String license_number,
+                                          @Field("id_motorcycle_type") int id_motorcycle_type,
+                                          @Field("id_customer") int id_customer);
 
     @GET("services/{id}")
     Call<ServicesData> getService(@Path("id") int id);
@@ -218,4 +223,9 @@ public interface ApiClient {
 
     @GET("detailSparepart/{id}")
     Call<DetailSparepart> getDetailSparepart(@Path("id") String id);
+
+    @POST("searchDetail")
+    @FormUrlEncoded
+    Call<HistoryList> checkMotor(@Field("license_number") String license_number,
+                                 @Field("phone_number") String phone_number);
 }

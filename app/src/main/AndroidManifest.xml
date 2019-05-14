@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.HomeSparepart"></activity>
+        <activity android:name=".UI.HistoryTransaction"></activity>
+        <activity android:name=".UI.CheckStatus" />
+        <activity android:name=".UI.HomeSparepart" />
         <activity android:name=".UI.HomePengguna" />
         <activity android:name=".UI.AddMotorcycle" />
         <activity android:name=".UI.MotorData" />
