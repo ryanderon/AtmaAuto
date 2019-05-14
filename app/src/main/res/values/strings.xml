@@ -54,9 +54,12 @@
     </string-array>
 
     <string-array name="sort">
-        <item>Sort By Name</item>
-        <item>Sort By Stock</item>
-        <item>Sort By Price</item>
+        <item>Sort By Name Ascending</item>
+        <item>Sort By Name Descending</item>
+        <item>Sort By Low Stock</item>
+        <item>Sort By High Stock</item>
+        <item>Sort By Low Price</item>
+        <item>Sort By High Price</item>
     </string-array>
 
 </resources>

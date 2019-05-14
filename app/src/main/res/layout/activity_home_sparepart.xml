@@ -50,7 +50,7 @@
             android:id="@+id/sortSpinner"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:layout_marginLeft="198dp"
+            android:layout_marginLeft="110dp"
             android:text="Sort"
             android:entries="@array/sort"
             app:layout_constraintLeft_toRightOf="@id/btnBack"

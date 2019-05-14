@@ -103,6 +103,21 @@ public class HomeSparepart extends AppCompatActivity {
 
                     case 1:
                         if(simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    if(o1.getSparepartName() == null || o2.getSparepartName() == null)
+                                        return 0;
+                                    return o2.getSparepartName().compareTo(o1.getSparepartName());
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+
+                    case 2:
+                        if(simpan > -1){
                         Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
                             @Override
                             public int compare(Sparepart o1, Sparepart o2) {
@@ -113,13 +128,42 @@ public class HomeSparepart extends AppCompatActivity {
                         }
                         break;
 
-                    case 2:
+                    case 3:
+                        if (simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    if(o1.getStock() == 0 || o2.getStock() == 0 )
+                                        return 0;
+                                    return Integer.compare(o2.getStock(), o1.getStock());
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                    case 4:
                         if(simpan > -1) {
                             Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
                                 @Override
                                 public int compare(Sparepart o1, Sparepart o2) {
                                     return Double.compare(o1.getSellPrice(), o2.getSellPrice());
 
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+
+                    case 5:
+                        if (simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    if(o1.getSellPrice() == 0 || o2.getSellPrice() == 0 )
+                                        return 0;
+                                    return Double.compare(o2.getSellPrice(), o1.getSellPrice());
                                 }
                             });
                             adapter.notifyDataSetChanged();
