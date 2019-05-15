@@ -167,6 +167,10 @@ public interface ApiClient {
     @GET("usermotorcycles/{id}")
     Call<MotorcycleList> getMotorcycle(@Path("id") int id);
 
+    @DELETE("motorcycles/{id}")
+    Call<ResponseBody> deleteMotor(@Path("id") int id);
+
+
     @POST("motorcycles")
     @FormUrlEncoded
     Call<MotorcycleData> addMotorcycle(@Field("license_number") String license_number,

@@ -116,6 +116,7 @@ public class AdapterSparepart2 extends RecyclerView.Adapter<AdapterSparepart2.My
         myViewHolder.sell_price.setText("Harga : " + data.getSellPrice());
         Picasso.get().load("https://p3l.yafetrakan.com/images/"+data.getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
 
+
 //
 //        myViewHolder.topcard.setOnClickListener(new View.OnClickListener() {
 //            @Override

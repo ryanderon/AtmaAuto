@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class MotorcycleData {
     @SerializedName("data")
     @Expose
-    private Motorcycle data = null;
+    private Motorcycle data;
 
     /**
      * No args constructor for use in serialization

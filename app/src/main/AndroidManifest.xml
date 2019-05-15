@@ -12,37 +12,73 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.HistoryTransaction"></activity>
-        <activity android:name=".UI.CheckStatus" />
-        <activity android:name=".UI.HomeSparepart" />
-        <activity android:name=".UI.HomePengguna" />
-        <activity android:name=".UI.AddMotorcycle" />
-        <activity android:name=".UI.MotorData" />
-        <activity android:name=".UI.CustomerOld" />
-        <activity android:name=".UI.MenuCustomer" />
-        <activity android:name=".UI.AddTransaction" />
-        <activity android:name=".UI.AddCustomer" />
-        <activity android:name=".UI.UpdateVerification" />
-        <activity android:name=".UI.VerificationProcurement" />
+        <activity
+            android:name=".UI.HistoryTransaction"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".UI.CheckStatus"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.HomeSparepart"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.HomePengguna"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.AddMotorcycle"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.MotorData"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.CustomerOld"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.MenuCustomer"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.AddTransaction"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.AddCustomer"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.UpdateVerification"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.VerificationProcurement"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI.AddProcurement"
             android:label="@string/title_activity_add_procurement"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UI.AddSupplier" />
-        <activity android:name=".UI.AddSparepart" />
-        <activity android:name=".UI.EditUser" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.AddSupplier"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.AddSparepart"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UI.EditUser"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UI.Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UI.MainActivity">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".UI.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Beranda" /> <!-- [START fcm_default_icon] -->
+        <activity android:name=".UI.Beranda"
+            android:screenOrientation="portrait"/>
+        <!-- [START fcm_default_icon] -->
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
              See README(https://goo.gl/l4GJaQ) for more.
