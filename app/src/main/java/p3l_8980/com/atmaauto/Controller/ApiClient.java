@@ -232,4 +232,8 @@ public interface ApiClient {
     @FormUrlEncoded
     Call<HistoryList> checkMotor(@Field("license_number") String license_number,
                                  @Field("phone_number") String phone_number);
+
+    @POST("notifications")
+    @FormUrlEncoded
+    Call<ResponseBody> addToken(@Field("token") String token);
 }

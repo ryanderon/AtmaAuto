@@ -11,12 +11,22 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import okhttp3.ResponseBody;
+import p3l_8980.com.atmaauto.Controller.ApiClient;
+import p3l_8980.com.atmaauto.Controller.SupplierData;
 import p3l_8980.com.atmaauto.R;
+import p3l_8980.com.atmaauto.UI.AddSupplier;
 import p3l_8980.com.atmaauto.UI.Beranda;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static p3l_8980.com.atmaauto.Notification.NotificationUtils.ANDROID_CHANNEL_ID;
 
@@ -29,6 +39,27 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.d("NEW_TOKEN",s);
+
+        Retrofit retrofit = new retrofit2.Retrofit.Builder()
+                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiClient apiClient = retrofit.create(ApiClient.class);
+
+        Call<ResponseBody> addToken = apiClient.addToken(s);
+
+        addToken.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("NEW_TOKEN","token masuk");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Gagal Input Data", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
