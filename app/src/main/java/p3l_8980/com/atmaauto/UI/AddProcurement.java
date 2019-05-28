@@ -90,7 +90,7 @@ public class AddProcurement extends AppCompatActivity {
             status.setSelection(getIndex(status, getIntent().getStringExtra("procurement_status")));
 
             Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://p3l.yafetrakan.com/api/")
+                    .baseUrl("http://192.168.19.140/8991/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -163,7 +163,7 @@ public class AddProcurement extends AppCompatActivity {
                 idsupplier = sp.getIdSupplier();
 
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -264,7 +264,7 @@ public class AddProcurement extends AppCompatActivity {
     {
         Log.d("idsparepart", idSparepart);
         Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -308,7 +308,7 @@ public class AddProcurement extends AppCompatActivity {
         status = findViewById(R.id.Status);
 
         Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -398,7 +398,7 @@ public class AddProcurement extends AppCompatActivity {
                 progressDialog.setMessage("Memproses Data...");
                 progressDialog.show();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -417,7 +417,7 @@ public class AddProcurement extends AppCompatActivity {
                             {
                                 Log.d("masuk", "masssuk");
                                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                                        .baseUrl("http://192.168.19.140/8991/api/")
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .build();
 
@@ -477,7 +477,7 @@ public class AddProcurement extends AppCompatActivity {
             progressDialog.setMessage("Memproses Data...");
             progressDialog.show();
             Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://p3l.yafetrakan.com/api/")
+                    .baseUrl("http://192.168.19.140/8991/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -495,7 +495,7 @@ public class AddProcurement extends AppCompatActivity {
                         {
                             Log.d("masuk", "masssuk");
                             Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                    .baseUrl("https://p3l.yafetrakan.com/api/")
+                                    .baseUrl("http://192.168.19.140/8991/api/")
                                     .addConverterFactory(GsonConverterFactory.create())
                                     .build();
 

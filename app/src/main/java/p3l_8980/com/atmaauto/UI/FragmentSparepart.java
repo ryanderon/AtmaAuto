@@ -17,10 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.support.v7.widget.SearchView;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import p3l_8980.com.atmaauto.Controller.ApiClient;
@@ -41,6 +45,7 @@ public class FragmentSparepart extends Fragment {
 
     View v;
     private RecyclerView rview;
+    private Spinner sortSpinner;
     private AdapterSparepart adapter;
     private RecyclerView.LayoutManager layout;
     private List<SparepartList> sparepartList;
@@ -48,7 +53,7 @@ public class FragmentSparepart extends Fragment {
     private List<Sparepart> SparepartBundleFull;
     private AdapterSparepart sparepartAdapter;
     private SparepartList sparepartList1;
-
+    private int simpan = -1;
 
     SessionManager session;
 
@@ -56,6 +61,8 @@ public class FragmentSparepart extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
@@ -100,6 +107,103 @@ public class FragmentSparepart extends Fragment {
         View view = inflater.inflate(R.layout.frgsparepart,container,false);
         rview = view.findViewById(R.id.sparepart_list);
         rview.setHasFixedSize(true);
+        sortSpinner = view.findViewById(R.id.sortSpinner);
+
+        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        if(simpan > -1 ){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
+                                }
+
+                            });adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                    case 1:
+                        if(simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    if(o1.getSparepartName() == null || o2.getSparepartName() == null)
+                                        return 0;
+                                    return o2.getSparepartName().compareTo(o1.getSparepartName());
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+
+                    case 2:
+                        if(simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+//                        return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
+                                    return Integer.compare(o1.getStock(), o2.getStock());
+                                }
+                            });adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                    case 3:
+                        if (simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    if(o1.getStock() == 0 || o2.getStock() == 0 )
+                                        return 0;
+                                    return Integer.compare(o2.getStock(), o1.getStock());
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                    case 4:
+                        if(simpan > -1) {
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    return Double.compare(o1.getSellPrice(), o2.getSellPrice());
+
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+
+                    case 5:
+                        if (simpan > -1){
+                            Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                                @Override
+                                public int compare(Sparepart o1, Sparepart o2) {
+                                    if(o1.getSellPrice() == 0 || o2.getSellPrice() == 0 )
+                                        return 0;
+                                    return Double.compare(o2.getSellPrice(), o1.getSellPrice());
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        }
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
         layout = new LinearLayoutManager(getContext());
         rview.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         rview.setAdapter(adapter);
@@ -111,7 +215,7 @@ public class FragmentSparepart extends Fragment {
         session.checkLogin();
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -125,7 +229,15 @@ public class FragmentSparepart extends Fragment {
                 try {
                     adapter = new AdapterSparepart(response.body(),getContext());
                     SparepartBundleFull = response.body().getData();
+
                     adapter.notifyDataSetChanged();
+                    simpan = 1;
+                    Collections.sort(SparepartBundleFull, new Comparator<Sparepart>() {
+                        @Override
+                        public int compare(Sparepart o1, Sparepart o2) {
+                            return o1.getSparepartName().toLowerCase().compareTo(o2.getSparepartName().toLowerCase());
+                        }
+                    });
 //                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 //                    rview.setLayoutManager(mLayoutManager);
 //                    rview.setItemAnimator(new DefaultItemAnimator());

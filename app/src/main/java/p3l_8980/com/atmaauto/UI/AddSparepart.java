@@ -99,7 +99,7 @@ public class AddSparepart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -241,7 +241,7 @@ public class AddSparepart extends AppCompatActivity {
             addButton.setVisibility(View.GONE);
             addButton.setText("UBAH");
 
-            Picasso.get().load("https://p3l.yafetrakan.com/images/"+getIntent().getStringExtra("image")).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(add_sparepart_image);
+            Picasso.get().load("http://192.168.19.140/8991/images/"+getIntent().getStringExtra("image")).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(add_sparepart_image);
         }
         else{
             deleteButton.setVisibility(View.GONE);
@@ -425,7 +425,7 @@ public class AddSparepart extends AppCompatActivity {
         title = findViewById(R.id.title);
 
         Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -527,7 +527,7 @@ public class AddSparepart extends AppCompatActivity {
                 progressDialog.show();
                 String place = idPosition +'-'+idPlace+'-'+number_sparepart.getText().toString();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -754,7 +754,7 @@ public class AddSparepart extends AppCompatActivity {
                 progressDialog.show();
                 String place = idPosition +"-"+idPlace+"-"+number_sparepart.getText().toString();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

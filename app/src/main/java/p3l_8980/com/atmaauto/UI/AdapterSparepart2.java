@@ -114,7 +114,7 @@ public class AdapterSparepart2 extends RecyclerView.Adapter<AdapterSparepart2.My
         myViewHolder.sparepart_name.setText(data.getSparepartName());
         myViewHolder.stock.setText("Stok : " + data.getStock());
         myViewHolder.sell_price.setText("Harga : " + data.getSellPrice());
-        Picasso.get().load("https://p3l.yafetrakan.com/images/"+data.getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
+        Picasso.get().load("http://192.168.19.140/8991/images/"+data.getImage()).memoryPolicy(MemoryPolicy.NO_CACHE) .networkPolicy(NetworkPolicy.NO_CACHE).into(myViewHolder.sparepart_image);
 
 
 //

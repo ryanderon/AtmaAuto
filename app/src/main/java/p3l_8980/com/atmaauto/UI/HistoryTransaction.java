@@ -52,7 +52,7 @@ public class HistoryTransaction extends AppCompatActivity {
         });
 
         Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import p3l_8980.com.atmaauto.Controller.UserData;
@@ -47,13 +49,18 @@ public class Beranda extends AppCompatActivity {
     static int view_position = 0;
     SessionManager session;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beranda);
         session = new SessionManager(Beranda.this);
+        String i = session.getKeyRole();
+
+        Toast.makeText(Beranda.this, i, Toast.LENGTH_SHORT).show();
         IntializeView();
-        
+
         // Shared Data
     }
 
@@ -62,6 +69,7 @@ public class Beranda extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         title = findViewById(R.id.toolbar_title);
         bottombar = findViewById(R.id.NavigationBot);
+
         root = findViewById(R.id.root);
         contentHamburger = findViewById(R.id.content_hamburger);
 //        contentRight = findViewById(R.id.content_right);
@@ -99,6 +107,8 @@ public class Beranda extends AppCompatActivity {
             }
         });
 
+
+
         switch (getIntent().getIntExtra("addDialog",0)){
             case 0: bottombar.setSelectedItemId(R.id.navigation_beranda); switchfragment(R.id.navigation_beranda);break;
             case 1: bottombar.setSelectedItemId(R.id.navigation_supplier); switchfragment(R.id.navigation_supplier);break;
@@ -109,30 +119,109 @@ public class Beranda extends AppCompatActivity {
         }
 
 
-        bottombar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.navigation_beranda:
-                        if(view_position != 0) switchfragment(R.id.navigation_beranda);
-                        return true;
-                    case R.id.navigation_supplier:
-                        if(view_position != 1) switchfragment(R.id.navigation_supplier);
-                        return true;
-                    case R.id.navigation_sparepart:
-                        if(view_position != 2) switchfragment(R.id.navigation_sparepart);
-                        return true;
-                    case R.id.navigation_procurement:
-                        if(view_position != 3) switchfragment(R.id.navigation_procurement);
-                        return true;
-                    case R.id.navigation_transaction:
-                        if(view_position != 4) switchfragment(R.id.navigation_transaction);
-                        return true;
+        if(session.getKeyRole().equalsIgnoreCase("Administrator")){
+            bottombar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.navigation_beranda:
+                            if(view_position != 0) switchfragment(R.id.navigation_beranda);
+                            return true;
+                        case R.id.navigation_supplier:
+                            if(view_position != 1) switchfragment(R.id.navigation_supplier);
+                            return true;
+                        case R.id.navigation_sparepart:
+                            if(view_position != 2) switchfragment(R.id.navigation_sparepart);
+                            return true;
+                        case R.id.navigation_procurement:
+                            if(view_position != 3) switchfragment(R.id.navigation_procurement);
+                            return true;
+                        case R.id.navigation_transaction:
+                            if(view_position != 4) switchfragment(R.id.navigation_transaction);
+                            return true;
 
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
+
+        else if(session.getKeyRole().equalsIgnoreCase("Customer Service")){
+            bottombar.findViewById(R.id.navigation_sparepart).setVisibility(View.GONE);
+            bottombar.findViewById(R.id.navigation_supplier).setVisibility(View.GONE);
+
+            bottombar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    bottombar.findViewById(R.id.navigation_sparepart).setVisibility(View.GONE);
+                    bottombar.findViewById(R.id.navigation_supplier).setVisibility(View.GONE);
+
+
+                    switch (menuItem.getItemId()) {
+                        case R.id.navigation_beranda:
+                            if(view_position != 0) switchfragment(R.id.navigation_beranda);
+
+                            return true;
+//                        case R.id.navigation_supplier:
+//                            if(view_position != 1) switchfragment(R.id.navigation_supplier);
+//                            return true;
+//                        case R.id.navigation_sparepart:
+//                            if(view_position != 2) switchfragment(R.id.navigation_sparepart);
+//                            return true;
+                        case R.id.navigation_procurement:
+                            if(view_position != 3) switchfragment(R.id.navigation_procurement);
+
+                            return true;
+                        case R.id.navigation_transaction:
+                            if(view_position != 4) switchfragment(R.id.navigation_transaction);
+
+                            return true;
+
+                    }
+                    return false;
+                }
+            });
+        }
+
+        else if(session.getKeyRole().equalsIgnoreCase("Casheer")){
+            bottombar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                    switch (menuItem.getItemId()) {
+
+                        case R.id.navigation_beranda:
+                            if(view_position != 0) switchfragment(R.id.navigation_beranda);
+                            bottombar.findViewById(R.id.navigation_sparepart).setVisibility(View.GONE);
+                            bottombar.findViewById(R.id.navigation_supplier).setVisibility(View.GONE);
+
+                            return true;
+//                        case R.id.navigation_supplier:
+//                            if(view_position != 1) switchfragment(R.id.navigation_supplier);
+//                            return true;
+//                        case R.id.navigation_sparepart:
+//                            if(view_position != 2) switchfragment(R.id.navigation_sparepart);
+//                            return true;
+                        case R.id.navigation_procurement:
+                            if(view_position != 3) switchfragment(R.id.navigation_procurement);
+                            bottombar.findViewById(R.id.navigation_sparepart).setVisibility(View.GONE);
+                            bottombar.findViewById(R.id.navigation_supplier).setVisibility(View.GONE);
+
+                            return true;
+                        case R.id.navigation_transaction:
+                            if(view_position != 4) switchfragment(R.id.navigation_transaction);
+                            bottombar.findViewById(R.id.navigation_sparepart).setVisibility(View.GONE);
+                            bottombar.findViewById(R.id.navigation_supplier).setVisibility(View.GONE);
+
+                            return true;
+
+                    }
+                    return false;
+                }
+            });
+        }
+
+
     }
 
     @Override
@@ -211,6 +300,7 @@ public class Beranda extends AppCompatActivity {
         }
         fragmentlayout.setLayoutParams(fragmentparams);
     }
+
 
     public void FABonCLick(View view) {
         Intent i;

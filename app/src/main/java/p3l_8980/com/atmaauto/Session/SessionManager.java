@@ -71,6 +71,11 @@ public class SessionManager {
         return pref.getString(KEY_ID,"id");
     }
 
+    public String getKeyRole()
+    {
+        return pref.getString(KEY_ROLE,"role");
+    }
+
     public void logoutUser(){
         editor.clear();
         editor.commit();

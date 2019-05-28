@@ -89,7 +89,7 @@ public class AddTransaction extends AppCompatActivity {
             transactionType.setSelection(getIndex(transactionType, getIntent().getStringExtra("type")));
 
             Retrofit retrofit= new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://p3l.yafetrakan.com/api/")
+                    .baseUrl("http://192.168.19.140/8991/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -312,7 +312,7 @@ public class AddTransaction extends AppCompatActivity {
                 idsparepartType = sp.getIdSparepartType();
 
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -402,7 +402,7 @@ public class AddTransaction extends AppCompatActivity {
     private void addToServiceCart()
     {
         Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -429,7 +429,7 @@ public class AddTransaction extends AppCompatActivity {
     private void addToSparepartCart()
     {
         Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -484,7 +484,7 @@ public class AddTransaction extends AppCompatActivity {
         rview2.setLayoutManager(layout2);
 
         Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                .baseUrl("https://p3l.yafetrakan.com/api/")
+                .baseUrl("http://192.168.19.140/8991/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -617,7 +617,7 @@ public class AddTransaction extends AppCompatActivity {
                 progressDialog.setMessage("Memproses Data...");
                 progressDialog.show();
                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                        .baseUrl("http://192.168.19.140/8991/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -637,7 +637,7 @@ public class AddTransaction extends AppCompatActivity {
                                 for (int x = 0; x < detailServices.size(); x++) {
                                     Log.d("masuk", "masssuk");
                                     Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                            .baseUrl("https://p3l.yafetrakan.com/api/")
+                                            .baseUrl("http://192.168.19.140/8991/api/")
                                             .addConverterFactory(GsonConverterFactory.create())
                                             .build();
 
@@ -671,7 +671,7 @@ public class AddTransaction extends AppCompatActivity {
                                 for (int x = 0; x < detailSpareparts.size(); x++) {
                                     Log.d("masuk", "masssuk");
                                     Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                            .baseUrl("https://p3l.yafetrakan.com/api/")
+                                            .baseUrl("http://192.168.19.140/8991/api/")
                                             .addConverterFactory(GsonConverterFactory.create())
                                             .build();
 
@@ -732,7 +732,7 @@ public class AddTransaction extends AppCompatActivity {
             progressDialog.setMessage("Memproses Data...");
             progressDialog.show();
             Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                    .baseUrl("https://p3l.yafetrakan.com/api/")
+                    .baseUrl("http://192.168.19.140/8991/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -753,7 +753,7 @@ public class AddTransaction extends AppCompatActivity {
                             for (int x = 0; x < detailServices.size(); x++) {
                                 Log.d("masuk", "masssuk");
                                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                                        .baseUrl("http://192.168.19.140/8991/api/")
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .build();
 
@@ -790,7 +790,7 @@ public class AddTransaction extends AppCompatActivity {
                             for (int x = 0; x < detailSpareparts.size(); x++) {
                                 Log.d("masuk", "masssuk");
                                 Retrofit retrofit = new retrofit2.Retrofit.Builder()
-                                        .baseUrl("https://p3l.yafetrakan.com/api/")
+                                        .baseUrl("http://192.168.19.140/8991/api/")
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .build();
 
