@@ -124,15 +124,15 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
                             if (response.code() == 200) {
 //                          notifyItemRemoved(vh.getAdapterPosition());
 //                          notifyItemRangeChanged(vh.getAdapterPosition(), SupplierBundle.getData().size());
-                                Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Supplier", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context.getApplicationContext(), "Berhasil hapus data Transaksi", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context.getApplicationContext(), "Gagal hapus data Transaksi", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data pengguna", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context.getApplicationContext(), "Gagal hapus data Transaksi", Toast.LENGTH_SHORT).show();
                         }
                     });
 
